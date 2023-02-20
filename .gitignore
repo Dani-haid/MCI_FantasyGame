@@ -1,0 +1,55 @@
+
+*.o
+
+#.DS_Store
+**/.DS_Store
+
+*.txt
+
+.idea
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/ 
+
+# CLion
+# CMake
+cmake-build-*/
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+ 
+ 
+# C extensions
+*.so
+ 
+# C++ Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
