@@ -12,10 +12,8 @@ int main() {
     std::srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
     struct Hero_t annina;
-    initHero(&annina, (char*)"Annina", 300, 50);//wieso braucht man hier expliziten Cast?
-    //wieso jetzt hier &-Zeichen und expliziter Cast von "Annina"??
+    initHero(&annina, (char*)"Annina", 300, 50);
     initItem(&annina.inventory[0], (char*)"Kanone", 15);
-    //init Item nicht ganz verstanden wieso muss kein struct für Item zuerst erstellt werden?
     initItem(&annina.inventory[6], (char*)"Gummibär", 5);
 
     struct Character_t matthias;
