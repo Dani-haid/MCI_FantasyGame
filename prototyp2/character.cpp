@@ -41,6 +41,18 @@ int Character::addInventarItem(const Item& item){
     return -1;
 };
 
+Item Character::removeInventarItem(int slot) {
+    Item tempItem;
+    if(slot >= 0 && slot < 10 && this->inventory[slot].getIsValid()){
+        tempItem = this->inventory[slot];
+        this->inventory[slot].setIsValid(false);
+        cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar des Characters entfernt." << endl;
+        return tempItem;
+    }
+    tempItem.initItem();
+    return tempItem;
+}
+
 //getter:
 string Character::getName(){
     return name;

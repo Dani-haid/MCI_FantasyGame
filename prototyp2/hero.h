@@ -22,6 +22,7 @@ public:
     int addInventarItem(const Item& item);//wieso macht hier eine Konstante Sinn?
     int addEquipmentItem(const Item& item);
     Item removeInventarItem(int slot);
+    Item removeEquipmentItem(int slot);
 
     //getter:
     string getName();

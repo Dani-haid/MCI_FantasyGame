@@ -17,6 +17,7 @@ public:
     void initCharacter(string name, int health, int gold);
     void attack(Hero &hero);
     int addInventarItem(const Item& item);
+    Item removeInventarItem(int slot);
 
     //getter:
     string getName();

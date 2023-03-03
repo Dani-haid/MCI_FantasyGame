@@ -57,11 +57,9 @@ int main() {
    if(annina.getHealth() >= 0){
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
 
-        Item tempItem = annina.removeInventarItem(11);
-
-        // tbd check ob korrekter Slot
+        Item tempItem = annina.removeInventarItem(1);
         if(!tempItem.getIsValid()){
-            cout << "ungültiger Gegenstand " << tempItem.getName() << " wurde entfernt." << endl;
+            cout << "ungültiger Gegenstand wurde entfernt." << endl;
             tempItem.setIsValid(false);
         };
 

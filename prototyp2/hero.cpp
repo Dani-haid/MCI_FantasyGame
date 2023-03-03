@@ -99,18 +99,27 @@ int Hero::addEquipmentItem(const Item& item){
 }
 
 Item Hero::removeInventarItem(int slot){
-//    Es wird der Gegenstand an der entsprechenden Stelle im Inventar der Heldin entfernt und zurückgegeben.
-//    Falls der angegeben Slot keinen gültigen Gegenstand enthält oder ein ungültiger Slot angegeben wurde,
-//    soll die Objektvariable isValid des zurückgegebenen Objekts auf false gesetzt werden.
-
-
-    if(this->inventory[slot].getIsValid()){
-        Item tempItem = this->inventory[slot];
+    Item tempItem;
+    if(slot >= 0 && slot < 10 && this->inventory[slot].getIsValid()){
+        tempItem = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar der Heldin entfernt." << endl;
         return tempItem;
     }
-    &this->inventory[slot];
+    tempItem.initItem();
+    return tempItem;
+};
+
+Item Hero::removeEquipmentItem(int slot){
+    Item tempItem;
+    if(slot >= 0 && slot < 2 && this->equipment[slot].getIsValid()){
+        tempItem = this->equipment[slot];
+        this->equipment[slot].setIsValid(false);
+        cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
+        return tempItem;
+    }
+    tempItem.initItem();
+    return tempItem;
 };
 
 
