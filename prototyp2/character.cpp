@@ -28,6 +28,19 @@ void Character::attack(Hero &hero){
     cout << this->name << " trifft " << hero.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
 };
 
+int Character::addInventarItem(const Item& item){
+    for (int i = 0; i < 10; ++i) {
+        //check ob der Platz im Inventar frei ist:
+        if(!(this->inventory[i].getIsValid())){
+            this->inventory[i] = item;
+            cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar des Characters hinzugefügt." << endl;
+            return i;
+        }
+    }
+    std::cout << "Inventar ist voll!" << std::endl;
+    return -1;
+};
+
 //getter:
 string Character::getName(){
     return name;

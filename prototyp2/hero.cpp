@@ -33,7 +33,6 @@ void Hero::attack(Character &enemy){
     int rand_num = std::rand()%((25+1)-15) + 15;
     int newHealth = enemy.getHealth() - rand_num; //umständlich geschrieben - noch vereinfachen!!
     enemy.setHealth(newHealth);
-    //enemy.health -= rand_num;
     cout << this->name << " trifft " << enemy.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
 };
 
@@ -73,6 +72,50 @@ bool Hero::fight(Character &enemy){
         enemy.attack(*this); //wieso hier nun * ??
     }
 };
+
+int Hero::addInventarItem(const Item& item){
+    for (int i = 0; i < 10; ++i) {
+        //check ob der Platz im Inventar frei ist:
+        if(!(this->inventory[i].getIsValid())){
+            this->inventory[i] = item;
+            cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar der Heldin hinzugefügt." << endl;
+            return i;
+        }
+    }
+    std::cout << "Inventar der Heldin ist voll!" << std::endl;
+    return -1;
+}
+
+int Hero::addEquipmentItem(const Item& item){
+    for (int i = 0; i < 2; ++i) {
+        if(!(this->equipment[i].getIsValid())){
+            this->equipment[i] = item;
+            cout << "Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
+            return i;
+        }
+    }
+    std::cout << "Equipment der Heldin ist voll!" << std::endl;
+    return -1;
+}
+
+Item Hero::removeInventarItem(int slot){
+//    Es wird der Gegenstand an der entsprechenden Stelle im Inventar der Heldin entfernt und zurückgegeben.
+//    Falls der angegeben Slot keinen gültigen Gegenstand enthält oder ein ungültiger Slot angegeben wurde,
+//    soll die Objektvariable isValid des zurückgegebenen Objekts auf false gesetzt werden.
+
+
+    if(this->inventory[slot].getIsValid()){
+        Item tempItem = this->inventory[slot];
+        this->inventory[slot].setIsValid(false);
+        cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar der Heldin entfernt." << endl;
+        return tempItem;
+    }
+    &this->inventory[slot];
+};
+
+
+
+
 
 //getter:
 string Hero::getName(){

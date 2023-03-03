@@ -34,39 +34,20 @@ int main() {
 
     if(annina.fight(matthias)){
         //füge beliebigen Gegenstand im Inventar der Heldin ein
-        for (int i = 0; i < 10; ++i) {
-            //sizeof(annina.inventory)/sizeof(annina.inventory[0])
-            // --> wollte 10 durch das ersetzen aber Fehlermeldung
-            // error: comparison of integer expressions of different signedness: 'int' and 'long unsigned int'
-            //prüfen ob Plätze im Inventar bereits voll sind (isValid true?)
-            if(annina.getInventory(i)->getIsValid()){
-                if(i >= 10-1){
-                    cout << "Inventar der Heldin ist voll!" << endl;
-                    break;
-                }
-                continue;
-            }else{
-                annina.getInventory(i)->initItem("Harpune", 60);
-                cout << "Gegenstand " << annina.getInventory(i)->getName() << " wurde an Stelle " << i << " zum Inventar der Heldin hinzugefügt." << endl;
-                break;
-            }
-        }
+        Item harpune;
+        harpune.initItem("Harpune", 60);
+
+        annina.addInventarItem(harpune);// -1 fall alle Plätze belegt sind
+
 
         if(annina.fight(pascal)){
             //füge beliebigen Gegenstand im Inventar der Heldin ein
-           for (int i = 0; i < 10; ++i) {
-                if(annina.getInventory(i)->getIsValid()){
-                    if(i >= 10-1){
-                        std::cout << "Inventar der Heldin ist voll!" << std::endl;
-                        break;
-                    }
-                    continue;
-                }else{
-                    annina.getInventory(i)->initItem("Giftpfeil", 12);
-                    cout << "Gegenstand " << annina.getInventory(i)->getName() << " wurde an Stelle " << i << " zum Inventar der Heldin hinzugefügt." << endl;
-                    break;
-                }
-            }
+            Item Testwaffe;
+            Testwaffe.initItem("Testwaffe", 120);
+
+            if(annina.addInventarItem(Testwaffe)>0){
+                cout << "Inventar einfügen erfolgreich" << endl;
+            };
         }
 
     }
@@ -75,6 +56,14 @@ int main() {
     //Falls Heldin noch am Leben ist, Gegenstände verkaufen:
    if(annina.getHealth() >= 0){
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
+
+        Item tempItem = annina.removeInventarItem(11);
+
+        // tbd check ob korrekter Slot
+        if(!tempItem.getIsValid()){
+            cout << "ungültiger Gegenstand " << tempItem.getName() << " wurde entfernt." << endl;
+            tempItem.setIsValid(false);
+        };
 
         int count = 0;
 
