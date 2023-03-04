@@ -15,39 +15,75 @@ int main() {
 
     Hero annina;
     annina.initHero("Annina", 300, 50);
-
-    //annina.inventory->initItem("Kanone", 15);
-    //annina.inventory->initItem("Gummibär", 5);
-
-    annina.getInventory(0)->initItem("Kanone", 15);
-    annina.getInventory(1)->initItem("Gummibär", 5);
-    cout << "Gegenstand " << annina.getInventory(0)->getName() << " wurde zum Inventar der Heldin hinzugefügt." << endl;
-    cout << "Gegenstand " << annina.getInventory(1)->getName() << " wurde zum Inventar der Heldin hinzugefügt." << endl;
+    Item kanone;
+    kanone.initItem("Kanone", 15);
+    annina.addInventarItem(kanone);
+    Item gummibaer;
+    gummibaer.initItem("Gummibaer", 5);
+    annina.addInventarItem(gummibaer);
 
 
     Character matthias;
     matthias.initCharacter("Matthias", 50, 0);
+    Item machete;
+    machete.initItem("Machete", 200);
+    matthias.addInventarItem(machete);
 
     Character pascal;
     pascal.initCharacter("Pascal", 100, 500);
+    Item lego;
+    lego.initItem("Lego", 30);
+    pascal.addInventarItem(lego);
+    Item harpune;
+    harpune.initItem("Harpune", 60);
+    pascal.addInventarItem(harpune);
 
 
     if(annina.fight(matthias)){
-        //füge beliebigen Gegenstand im Inventar der Heldin ein
-        Item harpune;
-        harpune.initItem("Harpune", 60);
-
-        annina.addInventarItem(harpune);// -1 fall alle Plätze belegt sind
+        //Gegenstand aus dem Inventar des Charakters wird ins Inventar der Heldin übertragen
+        int rand_num;//storage für welcher Slot bereits versucht wurde noch adaptieren
+        int i = 0;
+        Item* temp = NULL;
+        while (1){
+            rand_num = rand()%10; //zufälliger Slot (Zahl zwischen 0-9)
+            temp = matthias.getInventory(rand_num);
+            if(temp->getIsValid()){
+                if(annina.addInventarItem(*temp)>=0){
+                    matthias.removeInventarItem(rand_num);
+                }
+                break;
+            }else{
+                i++;
+                if(i >= 100){
+                    cout << "Kein Item im Inventar des Characters gefunden." << endl;
+                    break;
+                }continue;
+            }
+        }
 
 
         if(annina.fight(pascal)){
-            //füge beliebigen Gegenstand im Inventar der Heldin ein
-            Item Testwaffe;
-            Testwaffe.initItem("Testwaffe", 120);
+            //Gegenstand aus dem Inventar des Charakters wird ins Inventar der Heldin übertragen
+            int rand_num;//storage für welcher Slot bereits versucht wurde noch adaptieren
+            Item* tempT = NULL;
+            int i = 0;
+            while (1){
+                rand_num = rand()%10; //zufälliger Slot (Zahl zwischen 0-9)
+                tempT = pascal.getInventory(rand_num);
+                if(tempT->getIsValid()){
+                    if(annina.addInventarItem(*tempT)>=0){
+                        pascal.removeInventarItem(rand_num);
+                    }
+                    break;
+                }else{
+                    i++;
+                    if(i >= 100){
+                        cout << "Kein Item im Inventar des Characters gefunden." << endl;
+                        break;
+                    }continue;
+                }
+            }
 
-            if(annina.addInventarItem(Testwaffe)>0){
-                cout << "Inventar einfügen erfolgreich" << endl;
-            };
         }
 
     }
@@ -57,11 +93,12 @@ int main() {
    if(annina.getHealth() >= 0){
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
 
+        /*
         Item tempItem = annina.removeInventarItem(1);
         if(!tempItem.getIsValid()){
             cout << "ungültiger Gegenstand wurde entfernt." << endl;
             tempItem.setIsValid(false);
-        };
+        };*/
 
         int count = 0;
 

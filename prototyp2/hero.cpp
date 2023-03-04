@@ -30,7 +30,7 @@ void Hero::initHero(string name, int health, int gold){
 
 void Hero::attack(Character &enemy){
     //hier wird Referenz benötigt weil sonst nur kopie des wertes und dann ist geänderter Health nach Ende der Funktion wieder beim alten.
-    int rand_num = std::rand()%((25+1)-15) + 15;
+    int rand_num = std::rand()%((25+1)-15) + 15; //zwischen 15 und 25
     int newHealth = enemy.getHealth() - rand_num; //umständlich geschrieben - noch vereinfachen!!
     enemy.setHealth(newHealth);
     cout << this->name << " trifft " << enemy.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
@@ -82,7 +82,7 @@ int Hero::addInventarItem(const Item& item){
             return i;
         }
     }
-    std::cout << "Inventar der Heldin ist voll!" << std::endl;
+    std::cout << "Kein Platz mehr im Inventar der Heldin vorhanden!" << std::endl;
     return -1;
 }
 
@@ -94,7 +94,7 @@ int Hero::addEquipmentItem(const Item& item){
             return i;
         }
     }
-    std::cout << "Equipment der Heldin ist voll!" << std::endl;
+    std::cout << "Kein Platz mehr im Equipment der Heldin vorhanden!" << std::endl;
     return -1;
 }
 

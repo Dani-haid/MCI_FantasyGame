@@ -16,7 +16,7 @@ void Character::initCharacter(string name, int health, int gold){
         //prüfen ob Plätze im Inventar bereits voll sind (isValid true?)
         this->inventory[i].initItem();
     }
-    std::cout << "Charakter erstellt! " << "Name: " << this->name << " Health: " << this->health << " Gold: " << this->gold << std::endl;
+    std::cout << "Character erstellt! " << "Name: " << this->name << " Health: " << this->health << " Gold: " << this->gold << std::endl;
 };
 
 void Character::attack(Hero &hero){
