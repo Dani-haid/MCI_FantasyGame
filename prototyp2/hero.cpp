@@ -4,23 +4,16 @@
 
 using namespace std;
 
+
 void Hero::initHero(string name, int health, int gold){
     this->name = name;
     this->health = health;
     this->gold = gold;
 
-    for (int i = 0; i < 10 ; ++i) {
-        //sizeof(hero->inventory)/sizeof(hero->inventory[0]
-        // --> wollte 10 durch das ersetzen aber Fehlermeldung
-        // error: comparison of integer expressions of different signedness: 'int' and 'long unsigned int'
-        //prüfen ob Plätze im Inventar bereits voll sind (isValid true?)
+    for (int i = 0; i < INVENTORY_S ; ++i) {
         this->inventory[i].initItem();
     }
-    for (int i = 0; i < 2 ; ++i) {
-        //sizeof(hero->equipment)/sizeof(hero->equipment[0])
-        // --> wollte 2 durch das ersetzen aber Fehlermeldung
-        // error: comparison of integer expressions of different signedness: 'int' and 'long unsigned int'
-        //prüfen ob Plätze im Inventar bereits voll sind (isValid true?)
+    for (int i = 0; i < EQUIPMENT_S ; ++i) {
         this->equipment->initItem();
     }
 
@@ -28,25 +21,24 @@ void Hero::initHero(string name, int health, int gold){
 };
 
 
-void Hero::attack(Character &enemy){
-    //hier wird Referenz benötigt weil sonst nur kopie des wertes und dann ist geänderter Health nach Ende der Funktion wieder beim alten.
-    int rand_num = std::rand()%((25+1)-15) + 15; //zwischen 15 und 25
-    int newHealth = enemy.getHealth() - rand_num; //umständlich geschrieben - noch vereinfachen!!
-    enemy.setHealth(newHealth);
+void Hero::attack(Character& enemy){
+    int rand_num = rand()%((25+1)-15) + 15; //zwischen 15 und 25
+    enemy.setHealth(enemy.getHealth() - rand_num);
     cout << this->name << " trifft " << enemy.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
 };
 
 
 void Hero::sellItem(int index){
-    if(this->inventory[index].getIsValid()){//wird aktuell doppelt geprüft
-        this->gold += this->inventory[index].getValue();
+    if(index >= 0 && index < INVENTORY_S){
+        if(this->inventory[index].getIsValid()){//wird aktuell doppelt geprüft
+            this->gold += this->inventory[index].getValue();
+            this->inventory[index].setIsValid(false);
 
-    cout << "Gegenstand "<< this->inventory[index].getName() <<
-    " wird für " << this->inventory[index].getValue() << " verkauft." << this->name << " besitzt nun " << this->gold << " Gold." << endl;
-
-        this->inventory[index].setIsValid(false);
-    }else{
-        cout<< "kein gültiges Item vorhanden! " << endl;
+            cout << "Gegenstand "<< this->inventory[index].getName() << " wird für " << this->inventory[index].getValue() <<
+            " verkauft." << this->name << " besitzt nun " << this->gold << " Gold." << endl;
+        }else{
+            cout<< "kein gültiges Item vorhanden! " << endl;
+        }
     }
 };
 
@@ -69,12 +61,12 @@ bool Hero::fight(Character &enemy){
             cout << enemy.getName() << " fiel in Ohnmacht! " << this->name << " hat noch " << this->health << " Lebenspunkte übrig!" << endl;
             return true;
         }
-        enemy.attack(*this); //wieso hier nun * ??
+        enemy.attack(*this);
     }
 };
 
 int Hero::addInventarItem(const Item& item){
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
         if(!(this->inventory[i].getIsValid())){
             this->inventory[i] = item;
@@ -87,7 +79,7 @@ int Hero::addInventarItem(const Item& item){
 }
 
 int Hero::addEquipmentItem(const Item& item){
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < EQUIPMENT_S; ++i) {
         if(!(this->equipment[i].getIsValid())){
             this->equipment[i] = item;
             cout << "Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
@@ -100,7 +92,7 @@ int Hero::addEquipmentItem(const Item& item){
 
 Item Hero::removeInventarItem(int slot){
     Item tempItem;
-    if(slot >= 0 && slot < 10 && this->inventory[slot].getIsValid()){
+    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
         tempItem = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar der Heldin entfernt." << endl;
@@ -112,7 +104,7 @@ Item Hero::removeInventarItem(int slot){
 
 Item Hero::removeEquipmentItem(int slot){
     Item tempItem;
-    if(slot >= 0 && slot < 2 && this->equipment[slot].getIsValid()){
+    if(slot >= 0 && slot < EQUIPMENT_S && this->equipment[slot].getIsValid()){
         tempItem = this->equipment[slot];
         this->equipment[slot].setIsValid(false);
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
@@ -121,8 +113,6 @@ Item Hero::removeEquipmentItem(int slot){
     tempItem.initItem();
     return tempItem;
 };
-
-
 
 
 

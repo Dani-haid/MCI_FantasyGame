@@ -1,8 +1,8 @@
 #ifndef INC_1_SPIELEENTWICKUNG1_ITEM_H
 #define INC_1_SPIELEENTWICKUNG1_ITEM_H
 
-using namespace std;
 #include <string>
+using namespace std;
 
 class Item{
 private:

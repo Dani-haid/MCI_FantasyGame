@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
 
-    std::srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
+    srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
     Hero annina;
     annina.initHero("Annina", 300, 50);
@@ -86,19 +86,16 @@ int main() {
 
         }
 
+    }else{
+        cout << "Game Over!" << endl;
+        exit(0);
     }
+
 
 
     //Falls Heldin noch am Leben ist, Gegenstände verkaufen:
    if(annina.getHealth() >= 0){
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
-
-        /*
-        Item tempItem = annina.removeInventarItem(1);
-        if(!tempItem.getIsValid()){
-            cout << "ungültiger Gegenstand wurde entfernt." << endl;
-            tempItem.setIsValid(false);
-        };*/
 
         int count = 0;
 

@@ -2,16 +2,16 @@
 #define INC_1_SPIELEENTWICKUNG1_CHARACTER_H
 
 #include "item.h"
-using namespace std;
+#define INVENTORY_S_C 10
 
-class Hero;
+class Hero;//forward declaration
 
 class Character{
 private:
     string name;
     int health;
     int gold;
-    Item inventory[10];
+    Item inventory[INVENTORY_S_C];
 
 public:
     void initCharacter(string name, int health, int gold);
