@@ -1,6 +1,7 @@
 #ifndef INC_1_SPIELEENTWICKUNG1_CHARACTER_H
 #define INC_1_SPIELEENTWICKUNG1_CHARACTER_H
 
+#include <string>
 #include "item.h"
 #define INVENTORY_S_C 10
 
@@ -20,15 +21,37 @@ public:
     Item removeInventarItem(int slot);
 
     //getter:
-    string getName();
-    int getHealth();
-    int getGold();
-    Item* getInventory(int index);
+    string getName(){
+        return name;
+    };
+    int getHealth(){
+        return health;
+    };
+    int getGold(){
+        return gold;
+    };
+    Item* getInventory(int index){
+        if(index < 0 || index > 9){
+            Item* item;
+            item->initItem();
+            return item;
+        }
+        return &this->inventory[index];
+    };
 
     //setter:
-    void setName(string name);
-    void setHealth(int health);
-    void setGold(int gold);
+    void setName(string name){
+        this->name = name;
+    };
+    void setHealth(int health){
+        //hier wird health aktuell ins negative gesetzt, soll ich das zulassen?
+        this->health = health;
+    };
+    void setGold(int gold){
+        if(gold > 0){
+            this->gold = gold;
+        }
+    };
 };
 
 

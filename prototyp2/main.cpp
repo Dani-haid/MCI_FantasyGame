@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string> //wo genau inkludieren?
 #include <ctime>
 #include <cstdlib>
 #include "hero.h"

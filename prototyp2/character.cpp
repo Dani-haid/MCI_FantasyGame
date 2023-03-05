@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 void Character::initCharacter(string name, int health, int gold){
     this->name = name;
     this->health = health;
@@ -46,41 +45,4 @@ Item Character::removeInventarItem(int slot) {
     }
     tempItem.initItem();
     return tempItem;
-}
-
-//getter:
-string Character::getName(){
-    return name;
-}
-
-int Character::getHealth(){
-    return health;
-}
-
-int Character::getGold(){
-    return gold;
-}
-
-Item* Character::getInventory(int index){
-    return &this->inventory[index];
-};
-
-//setter:
-void Character::setName(string name){
-    this->name = name;
-};
-
-void Character::setHealth(int health){
-    //hier wird health aktuell ins negative gesetzt, soll ich das zulassen?
-    this->health = health;
-/*        if(health > 0){
-            this->health = health;
-        }
-        this->health = 0;*/
-};
-
-void Character::setGold(int gold){
-    if(gold > 0){
-        this->gold = gold;
-    }
 };

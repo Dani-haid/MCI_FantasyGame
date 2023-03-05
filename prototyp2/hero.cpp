@@ -115,36 +115,3 @@ Item Hero::removeEquipmentItem(int slot){
 };
 
 
-
-//getter:
-string Hero::getName(){
-    return name;
-}
-int Hero::getHealth(){
-    return health;
-}
-int Hero::getGold(){
-    return gold;
-}
-
-Item* Hero::getInventory(int index){
-    //prüfen wenn index < 0 oder > 10 ist
-    return &this->inventory[index];
-}
-
-Item* Hero::getEquipment(int index){
-    return &this->equipment[index];
-};
-
-//setter:
-void Hero::setName(string name){
-    this->name = name;
-}
-void Hero::setHealth(int health){
-    this->health = health;
-}
-void Hero::setGold(int gold){
-    if(gold > 0){
-        this->gold = gold;
-    }
-}
