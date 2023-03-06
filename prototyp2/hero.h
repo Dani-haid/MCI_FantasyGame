@@ -38,7 +38,7 @@ public:
     };
     Item* getInventory(int index){//hier besser Pointer oder Referenz als Rückgabeargument verwenden?
         if(index < 0 || index > 9){
-            Item* item;
+            Item* item = NULL;
             item->initItem();
             return item;
         }
@@ -47,7 +47,7 @@ public:
 
     Item* getEquipment(int index){
         if(index < 0 || index > 1){
-            Item* item;
+            Item* item = NULL;
             item->initItem();
             return item;
         }

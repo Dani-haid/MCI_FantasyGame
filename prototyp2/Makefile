@@ -1,6 +1,8 @@
 
 # Name of the binary
 BINARY = prototyp2
+# Directory
+BUILDDIR = build
 # Object files
 OBJS   = main.o character.o hero.o item.o
 # Compiler flags
@@ -10,12 +12,15 @@ LFLAGS =
 
 
 # all target: builds all important targets
-all: ${BINARY}
+all: dir $(BUILDDIR)/${BINARY}
+
+dir:
+	mkdir -p $(BUILDDIR)
 
 
 # Links the binary
-${BINARY} : ${OBJS}
-	g++ ${LFLAGS} -o ${BINARY} ${OBJS}
+$(BUILDDIR)/${BINARY} : ${OBJS}
+	g++ ${LFLAGS} -o $(BUILDDIR)/${BINARY} ${OBJS}
 
 
 # Compiles a source-file (any file with file extension .c) into an object-file
@@ -29,13 +34,13 @@ ${BINARY} : ${OBJS}
 
 
 # Rules can not only be used for compiling a program but also for executing a program
-run: ${BINARY}
-	./${BINARY}
+run: $(BUILDDIR)/${BINARY}
+	./$(BUILDDIR)/${BINARY}
 
 
 # Delete all build artifacts
 clean :
-	rm -rf ${BINARY} ${OBJS}
+	rm -rf $(BUILDDIR)/${BINARY} ${OBJS}
 
 
 # all  and clean are a "phony" targets, meaning they are no files

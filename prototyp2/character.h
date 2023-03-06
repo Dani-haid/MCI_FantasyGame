@@ -32,7 +32,7 @@ public:
     };
     Item* getInventory(int index){
         if(index < 0 || index > 9){
-            Item* item;
+            Item* item = NULL;
             item->initItem();
             return item;
         }
