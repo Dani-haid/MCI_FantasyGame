@@ -1,0 +1,4 @@
+#ifndef PROTOTYP3_HERO_H
+#define PROTOTYP3_HERO_H
+
+#endif //PROTOTYP3_HERO_H

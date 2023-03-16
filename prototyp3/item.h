@@ -1,0 +1,4 @@
+#ifndef PROTOTYP3_ITEM_H
+#define PROTOTYP3_ITEM_H
+
+#endif //PROTOTYP3_ITEM_H
