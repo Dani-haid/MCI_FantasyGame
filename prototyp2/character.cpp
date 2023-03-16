@@ -1,10 +1,11 @@
 #include <iostream>
+#include <cstdlib>
 #include "character.h"
 #include "hero.h"
 
 using namespace std;
 
-void Character::initCharacter(string name, int health, int gold){
+void Character::initCharacter(const string& name, int health, int gold){
     this->name = name;
     this->health = health;
     this->gold = gold;
@@ -22,6 +23,17 @@ void Character::attack(Hero &hero){
     cout << this->name << " trifft " << hero.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
 };
 
+Item Character::getInventory(int index){
+    if(index >= 0 && index < INVENTORY_S_C){
+        if(this->inventory[index].getIsValid()){
+            return this->inventory[index];
+        }
+    }
+    Item item;
+    item.initItem();
+    return item;
+};
+
 int Character::addInventarItem(const Item& item){
     for (int i = 0; i < INVENTORY_S_C; ++i) {
         //check ob der Platz im Inventar frei ist:
@@ -36,13 +48,13 @@ int Character::addInventarItem(const Item& item){
 };
 
 Item Character::removeInventarItem(int slot) {
-    Item tempItem;
     if(slot >= 0 && slot < INVENTORY_S_C && this->inventory[slot].getIsValid()){
-        tempItem = this->inventory[slot];
+        Item tempItem = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar des Characters entfernt." << endl;
         return tempItem;
     }
+    Item tempItem;
     tempItem.initItem();
     return tempItem;
 };

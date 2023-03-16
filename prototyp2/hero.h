@@ -1,7 +1,6 @@
 #ifndef INC_1_SPIELEENTWICKUNG1_HERO_H
 #define INC_1_SPIELEENTWICKUNG1_HERO_H
 
-#include <string>
 #include "item.h"
 #define INVENTORY_S 10
 #define EQUIPMENT_S 2
@@ -17,13 +16,17 @@ private:
     Item equipment[EQUIPMENT_S];
 
 public:
-    void initHero(string name, int health, int gold);
+    void initHero(const string& name, int health, int gold);
     void attack(Character& enemy);
     void sellItem(int index);
     bool fight(Character& enemy);
+
+    Item getInventory(int index);
     int addInventarItem(const Item& item);
-    int addEquipmentItem(const Item& item);
     Item removeInventarItem(int slot);
+
+    Item getEquipment(int index);
+    int addEquipmentItem(const Item& item);
     Item removeEquipmentItem(int slot);
 
     //getter:
@@ -36,29 +39,16 @@ public:
     int getGold(){
         return gold;
     };
-    Item* getInventory(int index){//hier besser Pointer oder Referenz als Rückgabeargument verwenden?
-        if(index < 0 || index > 9){
-            Item* item = NULL;
-            item->initItem();
-            return item;
-        }
-        return &this->inventory[index];
-    };
 
-    Item* getEquipment(int index){
-        if(index < 0 || index > 1){
-            Item* item = NULL;
-            item->initItem();
-            return item;
-        }
-        return &this->equipment[index];
-    };
 
     //setter:
     void setName(string name){
         this->name = name;
     };
     void setHealth(int health){
+        if(health < 0){
+            health = 0;
+        }
         this->health = health;
     };
     void setGold(int gold){

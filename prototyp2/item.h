@@ -11,18 +11,32 @@ private:
     bool isValid;
 
 public:
-    void initItem(string name, int gold);
+    void initItem(const string& name, int gold);
     void initItem();
 
     //getter:
-    string getName();
-    int getValue();
-    bool getIsValid();
+    bool getIsValid(){
+        return isValid;
+    };
+    string getName(){
+        return name;
+    };
+    int getValue(){
+        return value;
+    };
+
 
     //setter:
-    void setName(string name);
-    void setValue(int value);
-    void setIsValid(bool isValid);
+    void setIsValid(bool isValid){
+        this->isValid = isValid;
+    };
+    void setName(string& name){
+        this->name = name;
+    };
+    void setValue(int value){
+        this->value = value;
+    };
+
 
 };
 
