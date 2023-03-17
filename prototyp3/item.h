@@ -2,6 +2,7 @@
 #define PROTOTYP3_ITEM_H
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Item{
@@ -11,8 +12,19 @@ private:
     bool isValid;
 
 public:
-    void initItem(const string& name, int gold);
-    void initItem();
+    //default constructor
+    Item():name(""), value(0), isValid(false){};
+
+    //constructor
+    Item(const string& name, int value):name(name), value(value), isValid(true){
+        cout << "Item " << this->name << " erstellt" << endl;
+    }
+
+    //destructor
+    ~Item(){};
+
+    //void initItem(const string& name, int gold);
+    //void initItem();
 
     //getter:
     bool getIsValid(){

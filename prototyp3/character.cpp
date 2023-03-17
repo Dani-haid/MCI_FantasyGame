@@ -5,16 +5,6 @@
 
 using namespace std;
 
-void Character::initCharacter(const string& name, int health, int gold){
-    this->name = name;
-    this->health = health;
-    this->gold = gold;
-
-    for (int i = 0; i < INVENTORY_S_C ; ++i) {
-        this->inventory[i].initItem();
-    }
-    std::cout << "Character erstellt! " << "Name: " << this->name << " Health: " << this->health << " Gold: " << this->gold << std::endl;
-};
 
 void Character::attack(Hero &hero){
     int rand_num = rand()%((15+1)-5) + 5;
@@ -30,7 +20,7 @@ Item Character::getInventory(int index){
         }
     }
     Item item;
-    item.initItem();
+    //item.initItem();
     return item;
 };
 
@@ -55,6 +45,6 @@ Item Character::removeInventarItem(int slot) {
         return tempItem;
     }
     Item tempItem;
-    tempItem.initItem();
+    //tempItem.initItem();
     return tempItem;
 };

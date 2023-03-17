@@ -13,30 +13,22 @@ int main() {
 
     srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
-    Hero annina;
-    annina.initHero("Annina", 300, 50);
-    Item kanone;
-    kanone.initItem("Kanone", 15);
-    annina.addInventarItem(kanone);
-    Item gummibaer;
-    gummibaer.initItem("Gummibaer", 5);
-    annina.addInventarItem(gummibaer);
+    Hero annina("Annina", 300, 50, 5, 99);
 
+    Item kanone("Kanone", 15);
+    //annina.addInventarItem(kanone);
+    Item gummibaer("Gummibaer", 5);
+    //annina.addInventarItem(gummibaer);
 
-    Character matthias;
-    matthias.initCharacter("Matthias", 50, 0);
-    Item machete;
-    machete.initItem("Machete", 200);
-    matthias.addInventarItem(machete);
+    Character matthias("Matthias", 50, 0, 30, 88);
+    Item machete("Machete", 200);
+    //matthias.addInventarItem(machete);
 
-    Character pascal;
-    pascal.initCharacter("Pascal", 100, 500);
-    Item lego;
-    lego.initItem("Lego", 30);
-    pascal.addInventarItem(lego);
-    Item harpune;
-    harpune.initItem("Harpune", 60);
-    pascal.addInventarItem(harpune);
+    Character pascal("Pascal", 100, 500, 9, 77);
+    Item lego("Lego", 30);
+    //pascal.addInventarItem(lego);
+    Item harpune("Harpune", 60);
+    //pascal.addInventarItem(harpune);
 
 
     if(!annina.fight(matthias)){

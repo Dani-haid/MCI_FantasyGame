@@ -1,5 +1,5 @@
 #include "item.h"
-
+/*
 void Item::initItem(const string& name, int gold){
     this->name = name;
     this->value = gold;
@@ -8,4 +8,4 @@ void Item::initItem(const string& name, int gold){
 };
 void Item::initItem(){
     this->isValid = false;
-};
+};*/

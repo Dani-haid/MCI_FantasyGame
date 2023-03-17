@@ -5,22 +5,6 @@
 
 using namespace std;
 
-
-void Hero::initHero(const string& name, int health, int gold){
-    this->name = name;
-    this->health = health;
-    this->gold = gold;
-
-    for (int i = 0; i < INVENTORY_S ; ++i) {
-        this->inventory[i].initItem();
-    }
-    for (int i = 0; i < EQUIPMENT_S ; ++i) {
-        this->equipment->initItem();
-    }
-
-    std::cout << "Held erstellt! " << "Name: " << this->name << " Health: " << this->health << " Gold: " << this->gold << std::endl;
-};
-
 void Hero::attack(Character& enemy){
     int rand_num = rand()%((25+1)-15) + 15; //zwischen 15 und 25
     enemy.setHealth(enemy.getHealth() - rand_num);
@@ -89,7 +73,7 @@ Item Hero::getInventory(int index){
         }
     }
     Item item;
-    item.initItem();
+    //item.initItem();
     return item;
 };
 
@@ -100,7 +84,7 @@ Item Hero::getEquipment(int index){
         }
     }
     Item item;
-    item.initItem();
+    //item.initItem();
     return item;
 };
 
@@ -138,7 +122,7 @@ Item Hero::removeInventarItem(int slot){
         return tempItem;
     }
     Item tempItem;
-    tempItem.initItem();
+    //tempItem.initItem();
     return tempItem;
 };
 
@@ -150,6 +134,6 @@ Item Hero::removeEquipmentItem(int slot){
         return tempItem;
     }
     Item tempItem;
-    tempItem.initItem();
+    //tempItem.initItem();
     return tempItem;
 };

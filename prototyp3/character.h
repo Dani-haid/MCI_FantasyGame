@@ -4,17 +4,34 @@
 #include "item.h"
 #define INVENTORY_S_C 10
 
+using namespace std;
+
 class Hero;//forward declaration
 
 class Character{
-private:
+protected:
     string name;
     int health;
     int gold;
     Item inventory[INVENTORY_S_C];
+    int armor;
+    int magicResistance;
 
 public:
-    void initCharacter(const string& name, int health, int gold);
+    //default constructor
+    Character():name(""), health(0), gold(0), armor(0), magicResistance(0){};
+
+    //constructor
+    Character(const string& name, int health, int gold, int armor, int magicResistance):
+    name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+        cout << "Character " << this->name << " erstellt! " << endl;
+    }
+
+    //destructor
+    ~Character(){
+        cout << "Destructor Character " << this->name << endl;
+    }
+
     void attack(Hero &hero);
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
