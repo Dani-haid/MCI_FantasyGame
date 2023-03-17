@@ -4,6 +4,7 @@
 #include "item.h"
 #include "hero.h"
 #include "character.h"
+#include "npc.h"
 
 
 using namespace std;
@@ -15,20 +16,21 @@ int main() {
 
     Hero annina("Annina", 300, 50, 5, 99);
 
+    //annina.addInventarItem(new Item("Schlumpf", 20)); //wieso geht das so nicht?
     Item kanone("Kanone", 15);
-    //annina.addInventarItem(kanone);
+    annina.addInventarItem(kanone);
     Item gummibaer("Gummibaer", 5);
-    //annina.addInventarItem(gummibaer);
+    annina.addInventarItem(gummibaer);
 
-    Character matthias("Matthias", 50, 0, 30, 88);
+    Npc matthias("Matthias", 50, 0, 30, 88);
     Item machete("Machete", 200);
-    //matthias.addInventarItem(machete);
+    matthias.addInventarItem(machete);
 
-    Character pascal("Pascal", 100, 500, 9, 77);
+    Npc pascal("Pascal", 100, 500, 9, 77);
     Item lego("Lego", 30);
-    //pascal.addInventarItem(lego);
+    pascal.addInventarItem(lego);
     Item harpune("Harpune", 60);
-    //pascal.addInventarItem(harpune);
+    pascal.addInventarItem(harpune);
 
 
     if(!annina.fight(matthias)){

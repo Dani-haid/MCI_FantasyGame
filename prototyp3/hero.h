@@ -15,12 +15,14 @@ public:
     //constructor
     using Character::Character;
 
+    ~Hero(){};
+
     void attack(Character& enemy);
     void sellItem(int index);
     bool fight(Character& enemy);
 
     Item getInventory(int index);
-    int addInventarItem(const Item& item);
+    //int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
 
     Item getEquipment(int index);

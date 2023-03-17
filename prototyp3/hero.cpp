@@ -88,7 +88,7 @@ Item Hero::getEquipment(int index){
     return item;
 };
 
-int Hero::addInventarItem(const Item& item){
+/*int Hero::addInventarItem(const Item& item){
     for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
         if(!(this->inventory[i].getIsValid())){
@@ -99,7 +99,7 @@ int Hero::addInventarItem(const Item& item){
     }
     std::cout << "Kein Platz mehr im Inventar der Heldin vorhanden!" << std::endl;
     return -1;
-}
+}*/
 
 int Hero::addEquipmentItem(const Item& item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {

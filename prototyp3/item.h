@@ -21,10 +21,9 @@ public:
     }
 
     //destructor
-    ~Item(){};
-
-    //void initItem(const string& name, int gold);
-    //void initItem();
+    ~Item(){
+        cout << "destructor Item " << this->name << endl;
+    };
 
     //getter:
     bool getIsValid(){
