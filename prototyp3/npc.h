@@ -13,9 +13,6 @@ private:
 
 public:
     using Character::Character;
-
-    ~Npc(){};
-
 };
 
 

@@ -20,7 +20,6 @@ Item Character::getInventory(int index){
         }
     }
     Item item;
-    //item.initItem();
     return item;
 };
 
@@ -45,6 +44,5 @@ Item Character::removeInventarItem(int slot) {
         return tempItem;
     }
     Item tempItem;
-    //tempItem.initItem();
     return tempItem;
 };

@@ -15,6 +15,7 @@ public:
     //constructor
     using Character::Character;
 
+    //destructor
     ~Hero(){};
 
     void attack(Character& enemy);
@@ -23,7 +24,7 @@ public:
 
     Item getInventory(int index);
     //int addInventarItem(const Item& item);
-    Item removeInventarItem(int slot);
+    //Item removeInventarItem(int slot);
 
     Item getEquipment(int index);
     int addEquipmentItem(const Item& item);

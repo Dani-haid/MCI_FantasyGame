@@ -73,7 +73,6 @@ Item Hero::getInventory(int index){
         }
     }
     Item item;
-    //item.initItem();
     return item;
 };
 
@@ -84,22 +83,8 @@ Item Hero::getEquipment(int index){
         }
     }
     Item item;
-    //item.initItem();
     return item;
 };
-
-/*int Hero::addInventarItem(const Item& item){
-    for (int i = 0; i < INVENTORY_S; ++i) {
-        //check ob der Platz im Inventar frei ist:
-        if(!(this->inventory[i].getIsValid())){
-            this->inventory[i] = item;
-            cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar der Heldin hinzugefügt." << endl;
-            return i;
-        }
-    }
-    std::cout << "Kein Platz mehr im Inventar der Heldin vorhanden!" << std::endl;
-    return -1;
-}*/
 
 int Hero::addEquipmentItem(const Item& item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {
@@ -113,19 +98,6 @@ int Hero::addEquipmentItem(const Item& item){
     return -1;
 }
 
-Item Hero::removeInventarItem(int slot){
-
-    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
-        Item tempItem = this->inventory[slot];
-        this->inventory[slot].setIsValid(false);
-        cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar der Heldin entfernt." << endl;
-        return tempItem;
-    }
-    Item tempItem;
-    //tempItem.initItem();
-    return tempItem;
-};
-
 Item Hero::removeEquipmentItem(int slot){
     if(slot >= 0 && slot < EQUIPMENT_S && this->equipment[slot].getIsValid()){
         Item tempItem = this->equipment[slot];
@@ -134,6 +106,5 @@ Item Hero::removeEquipmentItem(int slot){
         return tempItem;
     }
     Item tempItem;
-    //tempItem.initItem();
     return tempItem;
 };
