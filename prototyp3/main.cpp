@@ -5,6 +5,8 @@
 #include "hero.h"
 #include "character.h"
 #include "npc.h"
+#include "fighter.h"
+#include "sorcerer.h"
 
 
 using namespace std;
@@ -17,16 +19,17 @@ int main() {
     Hero annina("Annina", 300, 50, 5, 99);
 
     //annina.addInventarItem(new Item("Schlumpf", 20)); //wieso geht das so nicht?
+
     Item kanone("Kanone", 15);
     annina.addInventarItem(kanone);
     Item gummibaer("Gummibaer", 5);
     annina.addInventarItem(gummibaer);
 
-    Npc matthias("Matthias", 50, 0, 30, 88);
+    Fighter matthias("Matthias", 50, 0, 30, 88, 100);
     Item machete("Machete", 200);
     matthias.addInventarItem(machete);
 
-    Npc pascal("Pascal", 100, 500, 9, 77);
+    Sorcerer pascal("Pascal", 100, 500, 9, 77, 8);
     Item lego("Lego", 30);
     pascal.addInventarItem(lego);
     Item harpune("Harpune", 60);

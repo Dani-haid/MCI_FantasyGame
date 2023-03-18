@@ -8,12 +8,12 @@
 
 class Hero : public Character{
 private:
-    Item inventory[INVENTORY_S];
+    Item inventory[INVENTORY_S];//auch noch in Character verlagern
     Item equipment[EQUIPMENT_S];
 
 public:
     //constructor
-    using Character::Character;
+    using Character::Character; //eigene stream Ausgabe erstellen
 
     //destructor
     ~Hero(){};

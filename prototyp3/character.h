@@ -48,6 +48,14 @@ public:
         return gold;
     };
 
+    int getArmor() const {
+        return armor;
+    }
+
+    int getMagicResistance() const {
+        return magicResistance;
+    };
+
 
     //setter:
     void setName(string name){
@@ -62,6 +70,18 @@ public:
     void setGold(int gold){
         if(gold >= 0){
             this->gold = gold;
+        }
+    };
+
+    void setArmor(int armor) {
+        if(armor >= 0){
+            this->armor = armor;
+        }
+    };
+
+    void setMagicResistance(int magicResistance) {
+        if(magicResistance >= 0){
+            this->magicResistance = magicResistance;
         }
     };
 };

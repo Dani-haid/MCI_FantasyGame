@@ -45,4 +45,4 @@ Item Character::removeInventarItem(int slot) {
     }
     Item tempItem;
     return tempItem;
-};
+}

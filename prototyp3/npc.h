@@ -4,14 +4,10 @@
 #include "character.h"
 #include "item.h"
 
-#define INVENTORY_S_C 10
-
 
 class Npc : public Character{
-private:
-    Item inventory[INVENTORY_S_C];
-
 public:
+    //constructor
     using Character::Character;
 };
 

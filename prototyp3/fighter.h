@@ -7,17 +7,29 @@ using namespace std;
 class Fighter : public Npc{
 private:
     int strength;
+
 public:
     //default constructor
-    //Fighter():strength(0){};
+    Fighter():strength(0){};
 
     //constructor
-    Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength):
-    Npc(name, health, gold), strength(strength){};
+    Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength)
+    : Npc(name, health, gold, armor, magicResistance), strength(strength){
+        cout << "Fighter " << this->name << " erstellt" << endl;
+    };
 
     //destructor
     ~Fighter(){};
 
+    int getStrength() const {
+        return strength;
+    };
+
+    void setStrength(int strength) {
+        if(strength >= 0){
+            this->strength = strength;
+        }
+    };
 };
 
 #endif //PROTOTYP3_FIGHTER_H
