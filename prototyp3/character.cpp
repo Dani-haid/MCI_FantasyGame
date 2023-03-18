@@ -5,16 +5,8 @@
 
 using namespace std;
 
-
-void Character::attack(Hero &hero){
-    int rand_num = rand()%((15+1)-5) + 5;
-    hero.setHealth(hero.getHealth() - rand_num);
-
-    cout << this->name << " trifft " << hero.getName() << " für " << rand_num << " Lebenspunkte!" << endl;
-};
-
 Item Character::getInventory(int index){
-    if(index >= 0 && index < INVENTORY_S_C){
+    if(index >= 0 && index < INVENTORY_S){
         if(this->inventory[index].getIsValid()){
             return this->inventory[index];
         }
@@ -24,7 +16,7 @@ Item Character::getInventory(int index){
 };
 
 int Character::addInventarItem(const Item& item){
-    for (int i = 0; i < INVENTORY_S_C; ++i) {
+    for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
         if(!(this->inventory[i].getIsValid())){
             this->inventory[i] = item;
@@ -37,7 +29,7 @@ int Character::addInventarItem(const Item& item){
 };
 
 Item Character::removeInventarItem(int slot) {
-    if(slot >= 0 && slot < INVENTORY_S_C && this->inventory[slot].getIsValid()){
+    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
         Item tempItem = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar des Characters entfernt." << endl;

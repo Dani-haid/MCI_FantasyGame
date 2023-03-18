@@ -3,12 +3,12 @@
 
 #include "item.h"
 #include "character.h"
-#define INVENTORY_S 10
+#include "npc.h"
+
 #define EQUIPMENT_S 2
 
 class Hero : public Character{
 private:
-    Item inventory[INVENTORY_S];//auch noch in Character verlagern
     Item equipment[EQUIPMENT_S];
 
 public:
@@ -16,13 +16,15 @@ public:
     using Character::Character; //eigene stream Ausgabe erstellen
 
     //destructor
-    ~Hero(){};
+    //~Hero(){};
+    virtual ~Hero(){};
 
-    void attack(Character& enemy);
+    virtual void attack(Character& enemy) override;
+
     void sellItem(int index);
     bool fight(Character& enemy);
 
-    Item getInventory(int index);
+    //Item getInventory(int index);
     //int addInventarItem(const Item& item);
     //Item removeInventarItem(int slot);
 

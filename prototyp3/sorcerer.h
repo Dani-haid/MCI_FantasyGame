@@ -16,6 +16,11 @@ public:
         cout << "Sorcerer " << this->name << " erstellt" << endl;
     };
 
+    //destructor
+    virtual ~Sorcerer(){};
+
+    virtual void attack(Character& enemy) override;
+
     int getMagicPower() const {
         return magicPower;
     };

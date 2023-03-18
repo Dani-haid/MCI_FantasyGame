@@ -2,7 +2,7 @@
 #define PROTOTYP3_CHARACTER_H
 
 #include "item.h"
-#define INVENTORY_S_C 10
+#define INVENTORY_S 10
 
 using namespace std;
 
@@ -13,7 +13,7 @@ protected:
     string name;
     int health;
     int gold;
-    Item inventory[INVENTORY_S_C];
+    Item inventory[INVENTORY_S];
     int armor;
     int magicResistance;
 
@@ -28,11 +28,11 @@ public:
     }
 
     //destructor
-    ~Character(){
+    virtual ~Character(){ //braucht man dann zusätzlich auch noch normalen Konstruktor??
         cout << "Destructor Character " << this->name << endl;
     }
 
-    void attack(Hero &hero);
+    virtual void attack(Character& character) = 0;
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
     Item getInventory(int index);

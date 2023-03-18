@@ -16,7 +16,7 @@ int main() {
 
     srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
-    Hero annina("Annina", 300, 50, 5, 99);
+    Hero annina("Annina", 300, 50, 50, 99);
 
     //annina.addInventarItem(new Item("Schlumpf", 20)); //wieso geht das so nicht?
 
@@ -25,7 +25,7 @@ int main() {
     Item gummibaer("Gummibaer", 5);
     annina.addInventarItem(gummibaer);
 
-    Fighter matthias("Matthias", 50, 0, 30, 88, 100);
+    Fighter matthias("Matthias", 50, 0, 3, 88, 100);
     Item machete("Machete", 200);
     matthias.addInventarItem(machete);
 

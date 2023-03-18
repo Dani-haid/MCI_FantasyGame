@@ -19,7 +19,9 @@ public:
     };
 
     //destructor
-    ~Fighter(){};
+    virtual ~Fighter(){};
+
+    virtual void attack(Character& enemy) override;
 
     int getStrength() const {
         return strength;
