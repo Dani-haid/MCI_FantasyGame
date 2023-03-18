@@ -7,18 +7,18 @@
 using namespace std;
 
 void Hero::attack(Character& enemy){
-    cout << "attack Hero" << endl;
+    cout << "attack " << *this << endl;
     //Die Heldin richtet einen Schaden gemäß folgender Formel an: damage = rand(15, 25) - Armor.
     int x = 15, y = 25;
     int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
     int damage = rand_num - enemy.getArmor();
-    cout << "damage: " << "random Number: " << rand_num << " - armor von Gegener " << enemy.getName() << " : " << enemy.getArmor() << " ergibt damage: " <<damage << endl;
+    //cout << "damage: " << "random Number: " << rand_num << " - armor von Gegener " << enemy.getName() << " : " << enemy.getArmor() << " ergibt damage: " <<damage << endl;
     if(damage > 0){
         enemy.setHealth(enemy.getHealth()-damage);
     }else{
-        cout << "Angriff von " << this->getName() << " war wirkungslos" << endl;
+        cout << "Angriff von " << *this << " war wirkungslos" << endl;
     }
-    cout << this->name << " trifft " << enemy.getName() << " für " << damage << " Lebenspunkte! " << enemy.getName() << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte." << endl;
+    cout << *this << " trifft " << enemy.getName() << " für " << damage << " Lebenspunkte! " << enemy.getName() << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte." << endl;
 };
 
 void Hero::sellItem(int index){
@@ -28,7 +28,7 @@ void Hero::sellItem(int index){
             this->inventory[index].setIsValid(false);
 
             cout << "Gegenstand "<< this->inventory[index].getName() << " wird für " << this->inventory[index].getValue() <<
-                 " verkauft." << this->name << " besitzt nun " << this->gold << " Gold." << endl;
+                 " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
         }
     }
 };
@@ -118,3 +118,8 @@ Item Hero::removeEquipmentItem(int slot){
     Item tempItem;
     return tempItem;
 };
+
+ostream& operator<<(ostream& out, const Hero& h){
+    out << "Heldin " << h.getName();
+    return out;
+}

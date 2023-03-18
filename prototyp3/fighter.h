@@ -34,4 +34,6 @@ public:
     };
 };
 
+ostream& operator<<(ostream& out, Fighter& f);
+
 #endif //PROTOTYP3_FIGHTER_H

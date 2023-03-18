@@ -17,7 +17,7 @@ public:
 
     //constructor
     Item(const string& name, int value):name(name), value(value), isValid(true){
-        cout << "Item " << this->name << " erstellt" << endl;
+        //cout << "Item " << this->name << " erstellt" << endl;
     }
 
     //destructor
@@ -26,13 +26,13 @@ public:
     };
 
     //getter:
-    bool getIsValid(){
+    bool getIsValid()const{
         return isValid;
     };
-    string getName(){
+    string getName()const{
         return name;
     };
-    int getValue(){
+    int getValue()const{
         return value;
     };
 
@@ -47,8 +47,6 @@ public:
     void setValue(int value){
         this->value = value;
     };
-
-
 };
 
 

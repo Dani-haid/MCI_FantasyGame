@@ -10,10 +10,12 @@ public:
     //constructor
     using Character::Character;
 
+    //destructor
     ~Npc(){
-        cout << this->name << " reitet in den Saloon." << endl;
+        cout << this->getName() << " reitet in den Saloon." << endl;
     }
 };
+
 
 
 #endif //PROTOTYP3_NPC_H

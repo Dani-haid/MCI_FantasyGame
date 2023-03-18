@@ -2,6 +2,7 @@
 #define PROTOTYP3_SORCERER_H
 
 #include "npc.h"
+using namespace std;
 
 class Sorcerer : public Npc{
 private:
@@ -30,5 +31,7 @@ public:
         }
     };
 };
+
+ostream& operator<<(ostream& out, Sorcerer& s);
 
 #endif //PROTOTYP3_SORCERER_H

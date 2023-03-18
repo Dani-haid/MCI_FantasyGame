@@ -34,4 +34,6 @@ public:
     Item removeEquipmentItem(int slot);
 };
 
+ostream& operator<<(ostream& out, const Hero& h);
+
 #endif //PROTOTYP3_HERO_H

@@ -31,26 +31,27 @@ public:
     virtual ~Character(){};
 
     virtual void attack(Character& character) = 0;
+
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
     Item getInventory(int index);
 
     //getter:
-    string getName(){
+    string getName() const{
         return name;
     };
-    int getHealth(){
+    int getHealth() const{
         return health;
     };
-    int getGold(){
+    int getGold() const{
         return gold;
     };
 
-    int getArmor() const {
+    int getArmor() const{
         return armor;
     }
 
-    int getMagicResistance() const {
+    int getMagicResistance() const{
         return magicResistance;
     };
 
@@ -84,6 +85,7 @@ public:
     };
 };
 
+ostream& operator<<(ostream& out, const Character& c);
 
 
 #endif //PROTOTYP3_CHARACTER_H
