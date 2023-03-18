@@ -9,6 +9,10 @@ class Npc : public Character{
 public:
     //constructor
     using Character::Character;
+
+    ~Npc(){
+        cout << this->name << " reitet in den Saloon." << endl;
+    }
 };
 
 

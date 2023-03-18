@@ -22,7 +22,7 @@ public:
 
     //destructor
     ~Item(){
-        cout << "destructor Item " << this->name << endl;
+        //cout << "destructor Item " << this->name << endl;
     };
 
     //getter:

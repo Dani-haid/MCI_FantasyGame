@@ -28,9 +28,7 @@ public:
     }
 
     //destructor
-    virtual ~Character(){ //braucht man dann zusätzlich auch noch normalen Konstruktor??
-        cout << "Destructor Character " << this->name << endl;
-    }
+    virtual ~Character(){};
 
     virtual void attack(Character& character) = 0;
     int addInventarItem(const Item& item);
