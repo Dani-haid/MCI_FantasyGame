@@ -2,6 +2,7 @@
 #define PROTOTYP3_CHARACTER_H
 
 #include "item.h"
+
 #define INVENTORY_S 10
 
 using namespace std;
@@ -24,7 +25,6 @@ public:
     //constructor
     Character(const string& name, int health, int gold, int armor, int magicResistance):
     name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
-        cout << "Character " << this->name << " erstellt! " << endl;
     }
 
     //destructor

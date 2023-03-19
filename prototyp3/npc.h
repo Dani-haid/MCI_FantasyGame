@@ -13,7 +13,7 @@ public:
     //destructor
     ~Npc(){
         cout << this->getName() << " reitet in den Saloon." << endl;
-    }
+    };
 };
 
 

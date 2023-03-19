@@ -4,10 +4,8 @@
 #include "item.h"
 #include "hero.h"
 #include "character.h"
-#include "npc.h"
 #include "fighter.h"
 #include "sorcerer.h"
-
 
 using namespace std;
 
@@ -16,9 +14,7 @@ int main() {
 
     srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
-    Hero annina("Annina", 300, 50, 50, 99);
-
-    //annina.addInventarItem(new Item("Schlumpf", 20)); //wieso geht das so nicht?
+    Hero annina("Annina", 300, 50, 50, 15);
 
     Item kanone("Kanone", 15);
     annina.addInventarItem(kanone);
@@ -46,10 +42,12 @@ int main() {
 
     //Falls Heldin noch am Leben ist, Gegenstände verkaufen:
     if(annina.getHealth() >= 0){
+        cout << "------------" << endl;
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
         for (int i = 0; i < INVENTORY_S; ++i) {
             annina.sellItem(i);
         }
+        cout << "------------" << endl;
     }
 
     return 0;

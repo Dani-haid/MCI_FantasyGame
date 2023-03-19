@@ -13,7 +13,10 @@ private:
 
 public:
     //constructor
-    using Character::Character; //eigene stream Ausgabe erstellen
+    Hero(const string& name, int health, int gold, int armor, int magicResistance):
+    Character(name, health, gold, armor, magicResistance){
+        cout << "Heldin " << this->name << " erstellt" << endl;
+    }
 
     //destructor
     virtual ~Hero(){
@@ -25,13 +28,10 @@ public:
     void sellItem(int index);
     bool fight(Character& enemy);
 
-    //Item getInventory(int index);
-    //int addInventarItem(const Item& item);
-    //Item removeInventarItem(int slot);
-
     Item getEquipment(int index);
     int addEquipmentItem(const Item& item);
     Item removeEquipmentItem(int slot);
+    Item retrieveRandomLoot(Character &enemy);
 };
 
 ostream& operator<<(ostream& out, const Hero& h);
