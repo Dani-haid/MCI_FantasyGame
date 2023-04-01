@@ -16,6 +16,8 @@ class IndexException: public GeneralException{
 protected:
     int index;
 public:
+    //using GeneralException::GeneralException;
+
     IndexException(const string& message, int index): GeneralException(message), index(index){};
 
     int getIndex() const {

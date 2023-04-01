@@ -21,6 +21,7 @@ int Character::addInventarItem(const Item& item){
         //check ob der Platz im Inventar frei ist:
         if(!(this->inventory[i].getIsValid())){
             this->inventory[i] = item;
+            cout << "Item Adresse: " << item.getName() << " " << &item << endl;
             //cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
             return i;
         }

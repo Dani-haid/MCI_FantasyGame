@@ -8,6 +8,7 @@
 #include "sorcerer.h"
 #include <string>
 #include "exceptions.h"
+#include <memory>
 
 using namespace std;
 
@@ -19,7 +20,19 @@ int main() {
     Hero annina("Annina", 300, 50, 50, 15);
 
     Item kanone("Kanone", 15);
+    cout << "Item Kanone Adresse1: "<< &kanone << endl;
+
     annina.addInventarItem(kanone);
+    Item tempAdressItem = annina.getInventory(0);
+    cout << "Item Kanone Adresse2: " << &tempAdressItem << endl;
+
+    cout << "-----------------"<< endl;
+
+
+    annina.addInventarItem(shared_ptr<Item>(new Item("TestwaffeBlubb", 99)));
+
+    cout << "-----------------"<< endl;
+
     Item gummibaer("Gummibaer", 5);
     annina.addInventarItem(gummibaer);
 
@@ -70,10 +83,14 @@ int main() {
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
         for (int i = 0; i < INVENTORY_S; ++i) {
             try{
+                //annina.sellItem(14);
                 annina.sellItem(i);
             }
             catch(IndexException& e){
                 cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+            }
+            catch(...){
+                cerr << "Unbekannter Fehler" <<endl;
             }
         }
         cout << "------------" << endl;
