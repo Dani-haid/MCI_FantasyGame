@@ -3,6 +3,7 @@
 #include "hero.h"
 #include "character.h"
 #include "npc.h"
+#include "exceptions.h"
 
 using namespace std;
 
@@ -74,29 +75,35 @@ Item Hero::retrieveRandomLoot(Character &enemy){
     int i = 0;
     Item temp;
 
-    while (1){
-        rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
-        temp = enemy.removeInventarItem(rand_num);
-
-        if(temp.getIsValid()){
-            return temp;
-        }else{
-            i++;
-            if(i >= 100){
-                cout << "Kein Item im Inventar des Characters gefunden." << endl;
-                return temp;
+        while (1){
+            rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
+            try{
+                temp = enemy.removeInventarItem(rand_num);
             }
-            continue;
+            catch(IndexException& e){
+               cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+               break;
+            }
+
+            if(temp.getIsValid()){
+                return temp;
+            }else{
+                i++;
+                if(i >= 100){
+                    cout << "Kein Item im Inventar des Characters gefunden." << endl;
+                    return temp;
+                }
+                continue;
+            }
         }
-    }
 };
 
 
 Item Hero::getEquipment(int index){
-    if(index >= 0 && index < EQUIPMENT_S){
-        if(this->equipment[index].getIsValid()){
-            return this->equipment[index];
-        }
+    if(index < 0 || index >= EQUIPMENT_S){
+        throw IndexException("Error: Ungültiger Index in getEquipment.", index);
+    }else if(this->equipment[index].getIsValid()){
+        return this->equipment[index];
     }
     Item item;
     return item;
@@ -115,6 +122,9 @@ int Hero::addEquipmentItem(const Item& item){
 }
 
 Item Hero::removeEquipmentItem(int slot){
+    if(slot < 0 || slot >= EQUIPMENT_S){
+        throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
+    };
     if(slot >= 0 && slot < EQUIPMENT_S && this->equipment[slot].getIsValid()){
         Item tempItem = this->equipment[slot];
         this->equipment[slot].setIsValid(false);

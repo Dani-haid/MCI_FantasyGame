@@ -6,6 +6,8 @@
 #include "character.h"
 #include "fighter.h"
 #include "sorcerer.h"
+#include <string>
+#include "exceptions.h"
 
 using namespace std;
 
@@ -37,7 +39,29 @@ int main() {
     }
     if(!annina.fight(pascal)){
         exit(0);
+    };
+
+
+    /*
+    //-----Test von try catch------ throw in character getInventory
+    try{
+    Item testItem1 = annina.getInventory(4);
+    cout << "Testitem von getInventory: " << testItem1.getName() << endl;
+
+    Item testItem2 = annina.getInventory(13);
+    cout << "Testitem von getInventory: " << testItem2.getName() << endl;
     }
+    catch(string& s){
+        cerr << s << endl;
+    }
+    catch(IndexException& e){
+        cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+    }
+    catch(...){
+        cerr << "Unbekannter Fehler" <<endl;
+        exit(1);
+    }
+     */
 
 
     //Falls Heldin noch am Leben ist, Gegenstände verkaufen:

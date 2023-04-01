@@ -2,14 +2,15 @@
 #include <cstdlib>
 #include "character.h"
 #include "hero.h"
+#include "exceptions.h"
 
 using namespace std;
 
 Item Character::getInventory(int index){
-    if(index >= 0 && index < INVENTORY_S){
-        if(this->inventory[index].getIsValid()){
+    if(index < 0 || index >= INVENTORY_S){
+        throw IndexException("Error: Ungültiger Index in getInventory.", index);
+    }else if(this->inventory[index].getIsValid()){
             return this->inventory[index];
-        }
     }
     Item item;
     return item;
@@ -29,6 +30,9 @@ int Character::addInventarItem(const Item& item){
 };
 
 Item Character::removeInventarItem(int slot) {
+    if(slot < 0 || slot >= INVENTORY_S){
+        throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
+    };
     if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
         Item tempItem = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
