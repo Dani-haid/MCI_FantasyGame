@@ -23,15 +23,16 @@ void Hero::attack(Character& enemy){
 };
 
 void Hero::sellItem(int index){
-    if(index >= 0 && index < INVENTORY_S){
-        if(this->inventory[index].getIsValid()){
-            this->gold += this->inventory[index].getValue();
-            this->inventory[index].setIsValid(false);
-
-            cout << "Gegenstand "<< this->inventory[index].getName() << " wird für " << this->inventory[index].getValue() <<
-                 " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
-        }
+    if(index < 0 || index >= INVENTORY_S) {
+        throw IndexException("Error: Ungültiger Index in sellItem.", index);
     }
+    else if(this->inventory[index].getIsValid()){
+        this->gold += this->inventory[index].getValue();
+        this->inventory[index].setIsValid(false);
+
+        cout << "Gegenstand "<< this->inventory[index].getName() << " wird für " << this->inventory[index].getValue() <<
+        " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
+        }
 };
 
 
@@ -83,6 +84,10 @@ Item Hero::retrieveRandomLoot(Character &enemy){
             catch(IndexException& e){
                cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
                break;
+            }
+            catch(...){
+                cerr << "Unbekannter Fehler" <<endl;
+                exit(1);
             }
 
             if(temp.getIsValid()){

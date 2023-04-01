@@ -69,7 +69,12 @@ int main() {
         cout << "------------" << endl;
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
         for (int i = 0; i < INVENTORY_S; ++i) {
-            annina.sellItem(i);
+            try{
+                annina.sellItem(i);
+            }
+            catch(IndexException& e){
+                cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+            }
         }
         cout << "------------" << endl;
     }
