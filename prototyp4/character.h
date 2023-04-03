@@ -33,8 +33,8 @@ public:
     virtual void attack(Character& character) = 0;
 
     int addInventarItem(shared_ptr<Item> item);
-    Item removeInventarItem(int slot);
-    Item getInventory(int index);
+    Item* removeInventarItem(int slot);
+    Item* getInventory(int index);
 
     //getter:
     string getName() const{

@@ -6,14 +6,13 @@
 
 using namespace std;
 
-Item Character::getInventory(int index){
+Item* Character::getInventory(int index){
     if(index < 0 || index >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in getInventory.", index);
     }else if(this->inventory[index]){
-        Item item = *this->inventory[index];
-        return item;
+        return this->inventory[index];
     }
-    Item item;
+    Item* item = NULL;
     return item;
 };
 
@@ -30,18 +29,16 @@ int Character::addInventarItem(shared_ptr<Item> item){
     return -1;
 };
 
-Item Character::removeInventarItem(int slot) {
+Item* Character::removeInventarItem(int slot) {
     if(slot < 0 || slot >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
-    };
-    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot]){
-        Item tempItem = *this->inventory[slot];
+    } else if(this->inventory[slot]){
+        Item* tempItem = this->inventory[slot];
         this->inventory[slot] = NULL;
-        //this->inventory[slot]->setIsValid(false);
         //cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
         return tempItem;
     }
-    Item tempItem;
+    Item* tempItem = NULL;
     return tempItem;
 };
 

@@ -28,9 +28,9 @@ public:
     void sellItem(int index);
     bool fight(Character& enemy);
 
-    Item getEquipment(int index);
+    Item* getEquipment(int index);
     int addEquipmentItem(const shared_ptr<Item> item);
-    Item removeEquipmentItem(int slot);
+    Item* removeEquipmentItem(int slot);
     Item retrieveRandomLoot(Character &enemy);
 };
 

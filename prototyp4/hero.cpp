@@ -75,10 +75,12 @@ Item Hero::retrieveRandomLoot(Character &enemy){
     //Gegenstand entfernen und zurückgeben
     int rand_num;
     int i = 0;
-    Item temp;
+    Item* temp = NULL;
 
         while (1){
-            rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
+            rand_num = 0;
+            //rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
+
             try{
                 temp = enemy.removeInventarItem(rand_num);
             }
@@ -91,13 +93,13 @@ Item Hero::retrieveRandomLoot(Character &enemy){
                 exit(1);
             }
 
-            if(temp.getIsValid()){
-                return temp;
+            if(temp){
+                return *temp;
             }else{
                 i++;
                 if(i >= 100){
                     cout << "Kein Item im Inventar des Characters gefunden." << endl;
-                    return temp;
+                    return *temp;
                 }
                 continue;
             }
@@ -105,14 +107,13 @@ Item Hero::retrieveRandomLoot(Character &enemy){
 };
 
 
-Item Hero::getEquipment(int index){
+Item* Hero::getEquipment(int index){
     if(index < 0 || index >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in getEquipment.", index);
     }else if(this->equipment[index]){
-        Item item = *this->equipment[index];
-        return item;
+        return this->equipment[index];
     }
-    Item item;
+    Item* item = NULL;
     return item;
 };
 
@@ -128,17 +129,16 @@ int Hero::addEquipmentItem(const shared_ptr<Item> item){
     return -1;
 }
 
-Item Hero::removeEquipmentItem(int slot){
+Item* Hero::removeEquipmentItem(int slot){
     if(slot < 0 || slot >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
-    };
-    if(slot >= 0 && slot < EQUIPMENT_S && this->equipment[slot]->getIsValid()){
-        Item tempItem = *this->equipment[slot];
+    }else if(this->equipment[slot]){
+        Item* tempItem = this->equipment[slot];
         this->equipment[slot]->setIsValid(false);
-        cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
+        cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
         return tempItem;
     }
-    Item tempItem;
+    Item* tempItem = NULL;
     return tempItem;
 };
 
