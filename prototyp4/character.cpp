@@ -16,12 +16,12 @@ Item Character::getInventory(int index){
     return item;
 };
 
-int Character::addInventarItem(const Item& item){
+int Character::addInventarItem(const shared_ptr<Item> item){
     for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
         if(!(this->inventory[i].getIsValid())){
-            this->inventory[i] = item;
-            cout << "Item Adresse: " << item.getName() << " " << &item << endl;
+            this->inventory[i] = *item;
+            //cout << "Item Adresse: " << item->getName() << " " << &item << endl;
             //cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
             return i;
         }

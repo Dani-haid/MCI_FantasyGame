@@ -56,12 +56,13 @@ bool Hero::fight(Character &enemy){
             cout << enemy.getName() << " fiel in Ohnmacht! "<<
             *this << " hat noch " << this->health << " Lebenspunkte übrig!" << endl;
 
-            Item stolenLoot = this->retrieveRandomLoot(enemy);
+            //addInventarItem erwartet shared Pointer als Uebergabeparameter
+            shared_ptr<Item> stolenLoot = make_shared<Item>(this->retrieveRandomLoot(enemy));
 
-            if(stolenLoot.getIsValid()){
+            if(stolenLoot->getIsValid()){
                 this->addInventarItem(stolenLoot);
                 cout << *this << " stiehlt " << enemy.getName() << " die Waffe: "
-                << stolenLoot.getName() << " im Wert von " << stolenLoot.getValue() << " Gold." << endl;
+                << stolenLoot->getName() << " im Wert von " << stolenLoot->getValue() << " Gold." << endl;
             };
             return true;//Heldin hat Kampf gewonnen
         }
@@ -114,10 +115,10 @@ Item Hero::getEquipment(int index){
     return item;
 };
 
-int Hero::addEquipmentItem(const Item& item){
+int Hero::addEquipmentItem(const shared_ptr<Item> item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {
         if(!(this->equipment[i].getIsValid())){
-            this->equipment[i] = item;
+            this->equipment[i] = *item;
             cout << "Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
             return i;
         }

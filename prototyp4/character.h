@@ -32,7 +32,7 @@ public:
 
     virtual void attack(Character& character) = 0;
 
-    int addInventarItem(const Item& item);
+    int addInventarItem(const shared_ptr<Item> item);
     Item removeInventarItem(int slot);
     Item getInventory(int index);
 

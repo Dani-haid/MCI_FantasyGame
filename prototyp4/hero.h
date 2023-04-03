@@ -29,7 +29,7 @@ public:
     bool fight(Character& enemy);
 
     Item getEquipment(int index);
-    int addEquipmentItem(const Item& item);
+    int addEquipmentItem(const shared_ptr<Item> item);
     Item removeEquipmentItem(int slot);
     Item retrieveRandomLoot(Character &enemy);
 };

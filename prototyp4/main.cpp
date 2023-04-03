@@ -19,32 +19,32 @@ int main() {
 
     Hero annina("Annina", 300, 50, 50, 15);
 
-    Item kanone("Kanone", 15);
-    cout << "Item Kanone Adresse1: "<< &kanone << endl;
+    //-----Item am Heap erstellt als SmartPointer-----
+    shared_ptr<Item> kanone2 = make_shared<Item>("Kanone", 15) ;
+    annina.addInventarItem(kanone2);
 
-    annina.addInventarItem(kanone);
-    Item tempAdressItem = annina.getInventory(0);
-    cout << "Item Kanone Adresse2: " << &tempAdressItem << endl;
+    //andere Option ohne make_shared:
+    // annina.addInventarItem(std::shared_ptr<Item>(new Item("abc", 495)));
 
-    cout << "-----------------"<< endl;
-
-
-    annina.addInventarItem(shared_ptr<Item>(new Item("TestwaffeBlubb", 99)));
-
-    cout << "-----------------"<< endl;
-
-    Item gummibaer("Gummibaer", 5);
+    //-----Item am Heap erstellt als SmartPointer-----
+    shared_ptr<Item> gummibaer = make_shared<Item>("Gummibaer", 5);
     annina.addInventarItem(gummibaer);
 
+
     Fighter matthias("Matthias", 50, 0, 3, 88, 100);
-    Item machete("Machete", 200);
+
+    //-----Item am Heap erstellt als SmartPointer-----
+    shared_ptr<Item> machete = make_shared<Item>("Machete", 200);
     matthias.addInventarItem(machete);
 
     Sorcerer pascal("Pascal", 100, 500, 9, 77, 8);
-    Item lego("Lego", 30);
+
+    //-----Item am Heap erstellt als SmartPointer-----
+    shared_ptr<Item> lego = make_shared<Item>("Lego", 30);
     pascal.addInventarItem(lego);
-    Item harpune("Harpune", 60);
+    shared_ptr<Item> harpune = make_shared<Item>("Harpune", 60);
     pascal.addInventarItem(harpune);
+
 
 
     if(!annina.fight(matthias)){
