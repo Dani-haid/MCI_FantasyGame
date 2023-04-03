@@ -9,7 +9,7 @@
 
 class Hero : public Character{
 private:
-    Item equipment[EQUIPMENT_S];
+    Item* equipment[EQUIPMENT_S] = {};
 
 public:
     //constructor

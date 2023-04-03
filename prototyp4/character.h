@@ -14,7 +14,7 @@ protected:
     string name;
     int health;
     int gold;
-    Item inventory[INVENTORY_S];
+    Item* inventory[INVENTORY_S] = {}; //zuerst alle mit NULL initialisieren
     int armor;
     int magicResistance;
 
@@ -32,7 +32,7 @@ public:
 
     virtual void attack(Character& character) = 0;
 
-    int addInventarItem(const shared_ptr<Item> item);
+    int addInventarItem(shared_ptr<Item> item);
     Item removeInventarItem(int slot);
     Item getInventory(int index);
 

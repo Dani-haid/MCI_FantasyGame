@@ -9,19 +9,19 @@ using namespace std;
 Item Character::getInventory(int index){
     if(index < 0 || index >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in getInventory.", index);
-    }else if(this->inventory[index].getIsValid()){
-            return this->inventory[index];
+    }else if(this->inventory[index]){
+        Item item = *this->inventory[index];
+        return item;
     }
     Item item;
     return item;
 };
 
-int Character::addInventarItem(const shared_ptr<Item> item){
+int Character::addInventarItem(shared_ptr<Item> item){
     for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
-        if(!(this->inventory[i].getIsValid())){
-            this->inventory[i] = *item;
-            //cout << "Item Adresse: " << item->getName() << " " << &item << endl;
+        if(!this->inventory[i]){
+            this->inventory[i] = &*item;//häää?
             //cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
             return i;
         }
@@ -34,9 +34,10 @@ Item Character::removeInventarItem(int slot) {
     if(slot < 0 || slot >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
     };
-    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
-        Item tempItem = this->inventory[slot];
-        this->inventory[slot].setIsValid(false);
+    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot]){
+        Item tempItem = *this->inventory[slot];
+        this->inventory[slot] = NULL;
+        //this->inventory[slot]->setIsValid(false);
         //cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
         return tempItem;
     }
