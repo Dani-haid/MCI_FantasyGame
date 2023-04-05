@@ -37,14 +37,14 @@ int Character::addInventarItem(shared_ptr<Item> item){
 shared_ptr<Item> Character::removeInventarItem(int slot) {
     if(slot < 0 || slot >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
-    } else if(this->inventory[slot]){
+    } else if(!this->inventory[slot]){
+        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
+    }else{
         shared_ptr<Item> tempItem = this->inventory[slot];
-        this->inventory[slot] = nullptr;
-        //cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
+        cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
+        this->inventory[slot].reset();// = nullptr;
         return tempItem;
     }
-    shared_ptr<Item> tempItem = nullptr;
-    return tempItem;
 };
 
 ostream& operator<<(ostream& out, const Character& c){

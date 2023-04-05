@@ -85,8 +85,8 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
 
 
         while (1){
-            rand_num = 0;
-            //rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
+            //rand_num = 1;
+            rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
 
             try{
                 //Shared Ptr Rückgabewert bei removeInventarItem
@@ -95,6 +95,9 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
             catch(IndexException& e){
                cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
                break;
+            }
+            catch(EmptySlotException& e){
+                cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
             }
             catch(...){
                 cerr << "Unbekannter Fehler" <<endl;
@@ -145,14 +148,14 @@ int Hero::addEquipmentItem(const shared_ptr<Item> item){
 shared_ptr<Item> Hero::removeEquipmentItem(int slot){
     if(slot < 0 || slot >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
-    }else if(this->equipment[slot]){
+    }else if(!this->equipment[slot]){
+        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeEquipmentItem.", slot);
+    }else{
         shared_ptr<Item> tempItem = this->equipment[slot];
-        this->equipment[slot] = nullptr;
         cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
+        this->equipment[slot].reset(); // = nullptr;
         return tempItem;
     }
-    shared_ptr<Item> tempItem = nullptr;
-    return tempItem;
 };
 
 ostream& operator<<(ostream& out, const Hero& h){
