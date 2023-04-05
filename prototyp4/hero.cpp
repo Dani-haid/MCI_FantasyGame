@@ -138,7 +138,7 @@ shared_ptr<Item> Hero::removeEquipmentItem(int slot){
         throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
     }else if(this->equipment[slot]){
         shared_ptr<Item> tempItem = this->equipment[slot];
-        this->equipment[slot]->setIsValid(false);
+        this->equipment[slot] = nullptr;
         cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
         return tempItem;
     }
