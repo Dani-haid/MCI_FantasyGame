@@ -7,25 +7,31 @@
 using namespace std;
 
 shared_ptr<Item> Character::getInventory(int index){
-    if(index < 0 || index >= INVENTORY_S){
-        throw IndexException("Error: Ungültiger Index in getInventory.", index);
-    }else if(this->inventory[index]){
-        return this->inventory[index];
+    try{
+        if(index < 0 || index >= INVENTORY_S){
+            throw IndexException("Error: Ungültiger Index in getInventory.", index);
+        }else if(!this->inventory[index]){
+            throw EmptySlotException("Error: Ungültiger Inventar Slot in getInventory.", index);
+
+        }else{
+            return this->inventory[index];
+        }
     }
-    shared_ptr<Item> item = nullptr;
-    return item;
+    catch (EmptySlotException e){
+        cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+        return nullptr;
+    }
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
         for (int i = 0; i < INVENTORY_S; ++i) {
-            //check ob der Platz im Inventar frei ist:
             if(!this->inventory[i]){
                 this->inventory[i] = item;
-                //cout << "Gegenstand " << this->inventory[i]->getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
+                cout << "Gegenstand " << this->inventory[i]->getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
                 return i;
             }
         }
-        throw FullInventarException("Error: Inventar ist voll in addInventarItem.");
+        throw FullInventarException("Error: Inventar ist voll.");
 };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {

@@ -24,9 +24,24 @@ public:
     }
 };
 
+//Fall Inventar voll ist. Gibt Fehlermeldung retour
 class FullInventarException: public GeneralException{
 public:
     using GeneralException::GeneralException;
+};
+
+//Fall in übergebenem Index kein Item vorhanden ist. Gibt Fehlermeldung und Index retour
+//evtl. hier auch noch Vererbung von IndexException einbauen
+class EmptySlotException: public GeneralException{
+protected:
+    int index;
+
+public:
+    EmptySlotException(const string& message, int index): GeneralException(message), index(index){};
+
+    int getIndex() const {
+        return index;
+    }
 };
 
 

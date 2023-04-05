@@ -22,16 +22,15 @@ void Hero::attack(Character& enemy){
 };
 
 void Hero::sellItem(int index){
-    if(index < 0 || index >= INVENTORY_S) {
-        throw IndexException("Error: Ungültiger Index in sellItem.", index);
-    }
-    else if(this->inventory[index]){
-        this->gold += this->inventory[index]->getValue();
-
-        cout << "Gegenstand "<< this->inventory[index]->getName() << " wird für " << this->inventory[index]->getValue() <<
-             " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
-
-        this->inventory[index]=NULL;
+        if(index < 0 || index >= INVENTORY_S) {
+            throw IndexException("Error: Ungültiger Index in sellItem.", index);
+        } else if(!this->inventory[index]){
+            throw EmptySlotException("Error: Ungültiger Inventar Slot in sellItem.", index);
+            }else{
+            this->gold += this->inventory[index]->getValue();
+            cout << "Gegenstand "<< this->inventory[index]->getName() << " wird für " << this->inventory[index]->getValue() <<
+                 " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
+            this->inventory[index].reset();
         }
 };
 
@@ -61,7 +60,12 @@ bool Hero::fight(Character &enemy){
             shared_ptr<Item> stolenLoot = this->retrieveRandomLoot(enemy);
 
             if(stolenLoot){
-                this->addInventarItem(stolenLoot);
+                try{
+                    this->addInventarItem(stolenLoot);
+                }
+                catch (FullInventarException e){
+                    cerr << e.what() << " Heldin kann gestohlene Waffe " << stolenLoot->getName() << " von " << enemy <<" nicht verstauen und lässt sie liegen." << endl;
+                }
                 cout << *this << " stiehlt " << enemy.getName() << " die Waffe: "
                 << stolenLoot->getName() << " im Wert von " << stolenLoot->getValue() << " Gold." << endl;
             };
@@ -112,13 +116,19 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
 
 
 shared_ptr<Item> Hero::getEquipment(int index){
-    if(index < 0 || index >= EQUIPMENT_S){
-        throw IndexException("Error: Ungültiger Index in getEquipment.", index);
-    }else if(this->equipment[index]){
-        return this->equipment[index];
+    try {
+        if (index < 0 || index >= EQUIPMENT_S) {
+            throw IndexException("Error: Ungültiger Index in getEquipment.", index);
+        } else if (!this->equipment[index]) {
+            throw EmptySlotException("Error: Ungültiger Inventar Slot in getEquipment. Hier ist kein Gegenstand gespeichert!", index);
+        } else {
+            return this->equipment[index];
+        }
     }
-    shared_ptr<Item> item = nullptr; //new oder makeshared???
-    return item;
+    catch (EmptySlotException e){
+        cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+        return nullptr;
+    }
 };
 
 int Hero::addEquipmentItem(const shared_ptr<Item> item){
