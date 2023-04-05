@@ -9,7 +9,7 @@
 
 class Hero : public Character{
 private:
-    Item* equipment[EQUIPMENT_S] = {};
+    shared_ptr<Item> equipment[EQUIPMENT_S] = {};
 
 public:
     //constructor
@@ -28,10 +28,10 @@ public:
     void sellItem(int index);
     bool fight(Character& enemy);
 
-    Item* getEquipment(int index);
+    shared_ptr<Item> getEquipment(int index);
     int addEquipmentItem(const shared_ptr<Item> item);
-    Item* removeEquipmentItem(int slot);
-    Item retrieveRandomLoot(Character &enemy);
+    shared_ptr<Item> removeEquipmentItem(int slot);
+    shared_ptr<Item> retrieveRandomLoot(Character &enemy);
 };
 
 ostream& operator<<(ostream& out, const Hero& h);

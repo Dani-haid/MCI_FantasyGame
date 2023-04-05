@@ -14,7 +14,7 @@ protected:
     string name;
     int health;
     int gold;
-    Item* inventory[INVENTORY_S] = {}; //zuerst alle mit NULL initialisieren
+    shared_ptr<Item> inventory[INVENTORY_S] = {}; //zuerst alle mit nullptr initialisieren
     int armor;
     int magicResistance;
 
@@ -33,8 +33,8 @@ public:
     virtual void attack(Character& character) = 0;
 
     int addInventarItem(shared_ptr<Item> item);
-    Item* removeInventarItem(int slot);
-    Item* getInventory(int index);
+    shared_ptr<Item> removeInventarItem(int slot);
+    shared_ptr<Item> getInventory(int index);
 
     //getter:
     string getName() const{

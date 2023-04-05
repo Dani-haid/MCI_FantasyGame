@@ -57,7 +57,8 @@ bool Hero::fight(Character &enemy){
             *this << " hat noch " << this->health << " Lebenspunkte übrig!" << endl;
 
             //addInventarItem erwartet shared Pointer als Uebergabeparameter
-            shared_ptr<Item> stolenLoot = make_shared<Item>(this->retrieveRandomLoot(enemy));
+            //shared_ptr<Item> stolenLoot = make_shared<Item>(this->retrieveRandomLoot(enemy));
+            shared_ptr<Item> stolenLoot = this->retrieveRandomLoot(enemy);
 
             if(stolenLoot){
                 this->addInventarItem(stolenLoot);
@@ -71,17 +72,20 @@ bool Hero::fight(Character &enemy){
     }
 };
 
-Item Hero::retrieveRandomLoot(Character &enemy){
+shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
     //Gegenstand entfernen und zurückgeben
     int rand_num;
     int i = 0;
-    Item* temp = NULL;
+    shared_ptr<Item> temp = nullptr;
+    make_shared<Item>();
+
 
         while (1){
             rand_num = 0;
             //rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
 
             try{
+                //Shared Ptr Rückgabewert bei removeInventarItem
                 temp = enemy.removeInventarItem(rand_num);
             }
             catch(IndexException& e){
@@ -94,12 +98,12 @@ Item Hero::retrieveRandomLoot(Character &enemy){
             }
 
             if(temp){
-                return *temp;
+                return temp;
             }else{
                 i++;
                 if(i >= 100){
                     cout << "Kein Item im Inventar des Characters gefunden." << endl;
-                    return *temp;
+                    return temp;
                 }
                 continue;
             }
@@ -107,20 +111,20 @@ Item Hero::retrieveRandomLoot(Character &enemy){
 };
 
 
-Item* Hero::getEquipment(int index){
+shared_ptr<Item> Hero::getEquipment(int index){
     if(index < 0 || index >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in getEquipment.", index);
     }else if(this->equipment[index]){
         return this->equipment[index];
     }
-    Item* item = NULL;
+    shared_ptr<Item> item = nullptr; //new oder makeshared???
     return item;
 };
 
 int Hero::addEquipmentItem(const shared_ptr<Item> item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {
         if(!this->equipment[i]){
-            this->equipment[i] = &*item; //hä?
+            this->equipment[i] = item; //hä?
             cout << "Gegenstand " << this->equipment[i]->getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
             return i;
         }
@@ -129,16 +133,16 @@ int Hero::addEquipmentItem(const shared_ptr<Item> item){
     return -1;
 }
 
-Item* Hero::removeEquipmentItem(int slot){
+shared_ptr<Item> Hero::removeEquipmentItem(int slot){
     if(slot < 0 || slot >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
     }else if(this->equipment[slot]){
-        Item* tempItem = this->equipment[slot];
+        shared_ptr<Item> tempItem = this->equipment[slot];
         this->equipment[slot]->setIsValid(false);
         cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
         return tempItem;
     }
-    Item* tempItem = NULL;
+    shared_ptr<Item> tempItem = nullptr;
     return tempItem;
 };
 
