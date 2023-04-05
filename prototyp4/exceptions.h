@@ -17,12 +17,16 @@ protected:
     int index;
 public:
     //using GeneralException::GeneralException;
-
     IndexException(const string& message, int index): GeneralException(message), index(index){};
 
     int getIndex() const {
         return index;
     }
+};
+
+class FullInventarException: public GeneralException{
+public:
+    using GeneralException::GeneralException;
 };
 
 

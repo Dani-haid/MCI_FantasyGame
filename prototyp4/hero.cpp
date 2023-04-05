@@ -125,12 +125,11 @@ int Hero::addEquipmentItem(const shared_ptr<Item> item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {
         if(!this->equipment[i]){
             this->equipment[i] = item; //hä?
-            cout << "Gegenstand " << this->equipment[i]->getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
+            //cout << "Gegenstand " << this->equipment[i]->getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
             return i;
         }
     }
-    std::cout << "Kein Platz mehr im Equipment der Heldin vorhanden!" << std::endl;
-    return -1;
+    throw FullInventarException("Error: Inventar ist voll in addEquipmentItem.");
 }
 
 shared_ptr<Item> Hero::removeEquipmentItem(int slot){

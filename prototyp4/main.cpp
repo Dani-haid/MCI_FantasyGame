@@ -19,17 +19,44 @@ int main() {
 
     Hero annina("Annina", 300, 50, 50, 15);
 
+    try{
     //-----Item am Heap erstellt als SmartPointer-----
-    shared_ptr<Item> kanone2 = make_shared<Item>("Kanone", 15) ;
-    annina.addInventarItem(kanone2);
+    shared_ptr<Item> kanone = make_shared<Item>("Kanone", 15) ;
+    annina.addInventarItem(kanone);
 
     //andere Option ohne make_shared:
     // annina.addInventarItem(std::shared_ptr<Item>(new Item("abc", 495)));
 
     //-----Item am Heap erstellt als SmartPointer-----
-    shared_ptr<Item> gummibaer = make_shared<Item>("Gummibaer", 5);
+    shared_ptr<Item> gummibaer = make_shared<Item>("Gummibaer1", 5);
     annina.addInventarItem(gummibaer);
 
+    shared_ptr<Item> gummibaer2 = make_shared<Item>("Gummibaer2", 5);
+    annina.addInventarItem(gummibaer2);
+
+    shared_ptr<Item> gummibaer3 = make_shared<Item>("Gummibaer3", 5);
+    annina.addInventarItem(gummibaer3);
+
+    shared_ptr<Item> gummibaer4 = make_shared<Item>("Gummibaer4", 5);
+    annina.addInventarItem(gummibaer4);
+
+    shared_ptr<Item> gummibaer5 = make_shared<Item>("Gummibaer5", 5);
+    annina.addInventarItem(gummibaer5);
+
+    shared_ptr<Item> gummibaer6 = make_shared<Item>("Gummibaer6", 5);
+    annina.addInventarItem(gummibaer6);
+
+    shared_ptr<Item> gummibaer7 = make_shared<Item>("Gummibaer7", 5);
+    annina.addInventarItem(gummibaer7);
+
+        /*shared_ptr<Item> gummibaer8 = make_shared<Item>("Gummibaer", 5);
+        annina.addInventarItem(gummibaer8);
+
+        shared_ptr<Item> gummibaer9 = make_shared<Item>("Gummibaer", 5);
+        annina.addInventarItem(gummibaer9);
+
+        shared_ptr<Item> gummibaer10 = make_shared<Item>("Gummibaer", 5);
+        annina.addInventarItem(gummibaer10);*/
 
     Fighter matthias("Matthias", 50, 0, 3, 88, 100);
 
@@ -44,6 +71,7 @@ int main() {
     pascal.addInventarItem(lego);
     shared_ptr<Item> harpune = make_shared<Item>("Harpune", 60);
     pascal.addInventarItem(harpune);
+
 
 
 
@@ -95,6 +123,10 @@ int main() {
         }
         cout << "------------" << endl;
     }
-
     return 0;
+
+    }
+    catch (FullInventarException e){
+        cerr << e.what() <<" Pipi Langstrumpf: " << endl;
+    }
 }

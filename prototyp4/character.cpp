@@ -17,16 +17,15 @@ shared_ptr<Item> Character::getInventory(int index){
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
-    for (int i = 0; i < INVENTORY_S; ++i) {
-        //check ob der Platz im Inventar frei ist:
-        if(!this->inventory[i]){
-            this->inventory[i] = item;
-            cout << "Gegenstand " << this->inventory[i]->getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
-            return i;
+        for (int i = 0; i < INVENTORY_S; ++i) {
+            //check ob der Platz im Inventar frei ist:
+            if(!this->inventory[i]){
+                this->inventory[i] = item;
+                //cout << "Gegenstand " << this->inventory[i]->getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
+                return i;
+            }
         }
-    }
-    std::cout << "Inventar ist voll!" << std::endl;
-    return -1;
+        throw FullInventarException("Error: Inventar ist voll in addInventarItem.");
 };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {
