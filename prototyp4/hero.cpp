@@ -43,37 +43,30 @@ bool Hero::fight(Character &enemy){
     cout << "------------" << endl;
     cout << "Neuer Kampf beginnt: " << this->name << " gegen " << enemy.getName() << endl;
 
-    while(1){
-        if(this->health <= 0){
-            cout << "Game Over!" << endl;
-            cout << *this << " wurde besiegt! " << enemy.getName() << " hat noch " << enemy.getHealth() << " Lebenspunkte übrig!" << endl;
-            return false;
-        }
-        this->attack(enemy);
+    while(this->getHealth() > 0 && enemy.getHealth() > 0){
+        this->attack(enemy); //Heldin greift Gegner an
 
         if(enemy.getHealth() <= 0){
             cout << enemy.getName() << " fiel in Ohnmacht! "<<
-            *this << " hat noch " << this->health << " Lebenspunkte übrig!" << endl;
+                 *this << " hat noch " << this->health << " Lebenspunkte übrig!" << endl;
 
-            //addInventarItem erwartet shared Pointer als Uebergabeparameter
-            //shared_ptr<Item> stolenLoot = make_shared<Item>(this->retrieveRandomLoot(enemy));
             shared_ptr<Item> stolenLoot = this->retrieveRandomLoot(enemy);
-
             if(stolenLoot){
-                try{
-                    this->addInventarItem(stolenLoot);
+                if(this->addInventarItem(stolenLoot) > 0){
+                    cout << *this << " stiehlt " << enemy.getName() << " die Waffe: "
+                         << stolenLoot->getName() << " im Wert von " << stolenLoot->getValue() << " Gold." << endl;
                 }
-                catch (FullInventarException e){
-                    cerr << e.what() << " Heldin kann gestohlene Waffe " << stolenLoot->getName() << " von " << enemy <<" nicht verstauen und lässt sie liegen." << endl;
-                }
-                cout << *this << " stiehlt " << enemy.getName() << " die Waffe: "
-                << stolenLoot->getName() << " im Wert von " << stolenLoot->getValue() << " Gold." << endl;
             };
             return true;//Heldin hat Kampf gewonnen
         }
-
         enemy.attack(*this);
     }
+    cout << "Game Over!" << endl;
+    cout << *this << " wurde besiegt! " << enemy.getName() << " hat noch " << enemy.getHealth() << " Lebenspunkte übrig!" << endl;
+    return false;
+
+
+
 };
 
 shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
@@ -85,35 +78,35 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
 
 
         while (1){
-            //rand_num = 1;
+            //rand_num = 8;//testvariable
             rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
 
             try{
                 temp = enemy.removeInventarItem(rand_num);
+
+                if(temp){
+                    return temp;
+                }else{
+                    i++;
+                    if(i >= 100){
+                        throw NoItemFoundException(" Kein Item im Inventar des Characters gefunden.");
+                    }
+                    continue;
+                }
             }
             catch(IndexException& e){
-               cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
-               break;
+                cerr << "RetrieveRandomLoot: " << enemy.getName() << " " << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+                break;
             }
             catch(EmptySlotException& e){
-                cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+                cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
             }
-            catch(...){
-                cerr << "Unbekannter Fehler" <<endl;
-                exit(1);
-            }
-
-            if(temp){
+            catch(NoItemFoundException& e){
+                cerr << "RetrieveRandomLoot: " << enemy.getName() << e.what() << endl;
                 return temp;
-            }else{
-                i++;
-                if(i >= 100){
-                    cout << "Kein Item im Inventar des Characters gefunden." << endl;
-                    return temp;
-                }
-                continue;
             }
         }
+        return temp;
 };
 
 
@@ -127,8 +120,8 @@ shared_ptr<Item> Hero::getEquipment(int index){
             return this->equipment[index];
         }
     }
-    catch (EmptySlotException e){
-        cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+    catch (EmptySlotException& e){
+        cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
         this->equipment[index].reset();
         return this->equipment[index];
     }

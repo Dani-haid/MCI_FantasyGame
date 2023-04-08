@@ -36,8 +36,6 @@ int main() {
     shared_ptr<Item> gummibaer8 = make_shared<Item>("Gummibaer", 5);
     shared_ptr<Item> gummibaer9 = make_shared<Item>("Gummibaer", 5);
     shared_ptr<Item> gummibaer10 = make_shared<Item>("Gummibaer", 5);
-    //andere Option ohne make_shared:
-    // annina.addInventarItem(std::shared_ptr<Item>(new Item("abc", 495)));
 
     shared_ptr<Item> machete = make_shared<Item>("Machete", 200);
     shared_ptr<Item> lego = make_shared<Item>("Lego", 30);
@@ -50,11 +48,11 @@ int main() {
     annina.addInventarItem(gummibaer3);
     annina.addInventarItem(gummibaer4);
     annina.addInventarItem(gummibaer5);
-    annina.addInventarItem(gummibaer6);
-    //annina.addInventarItem(gummibaer7);
-    //annina.addInventarItem(gummibaer8);
-    //annina.addInventarItem(gummibaer9);
-    //annina.addInventarItem(gummibaer10);
+    /*annina.addInventarItem(gummibaer6);
+    annina.addInventarItem(gummibaer7);
+    annina.addInventarItem(gummibaer8);
+    annina.addInventarItem(gummibaer9);
+    annina.addInventarItem(gummibaer10);*/
 
     matthias.addInventarItem(machete);
 
@@ -89,36 +87,13 @@ int main() {
             catch(IndexException& e){
                 cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
             }
-            catch(EmptySlotException e){
-                cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
-            }
-            catch(...){
-                cerr << "Unbekannter Fehler" <<endl;
+            catch(EmptySlotException& e){
+                cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
             }
         }
         cout << "------------" << endl;
     }
 
-        /*
-    //-----Test von try catch------ throw in character getInventory
-    try{
-    Item testItem1 = annina.getInventory(4);
-    cout << "Testitem von getInventory: " << testItem1.getName() << endl;
-
-    Item testItem2 = annina.getInventory(13);
-    cout << "Testitem von getInventory: " << testItem2.getName() << endl;
-    }
-    catch(string& s){
-        cerr << s << endl;
-    }
-    catch(IndexException& e){
-        cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
-    }
-    catch(...){
-        cerr << "Unbekannter Fehler" <<endl;
-        exit(1);
-    }
-     */
     }
     catch (...){
         cout << "unbekannter Fehler aufgetaucht" << endl;

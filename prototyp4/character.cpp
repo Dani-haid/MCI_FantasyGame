@@ -16,8 +16,8 @@ shared_ptr<Item> Character::getInventory(int index){
             return this->inventory[index];
         }
     }
-    catch (EmptySlotException e){
-        cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+    catch (EmptySlotException& e){
+        cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
         this->inventory[index].reset();
         return this->inventory[index];
     }
@@ -32,11 +32,12 @@ int Character::addInventarItem(shared_ptr<Item> item){
                 return i;
             }
         }
-        throw FullInventarException("Error: Inventar ist voll. Gegenstand kann nicht aufgenommen werden.");
+        throw FullInventarException("Error: Inventar ist voll. Folgender Gegenstand kann nicht aufgenommen werden: ");
     }
-catch (FullInventarException& e){
-    cout << "addInventarItem: " << e.what() << endl;
-}
+    catch (FullInventarException& e){
+        cout << "addInventarItem: " << e.what() << item->getName() << endl;
+        return -1;
+    }
 };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {

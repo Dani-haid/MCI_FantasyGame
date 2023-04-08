@@ -25,13 +25,10 @@ public:
 
     //destructor
     ~Item(){
-        cout << "destructor Item: " << this->name << endl;
+        //cout << "destructor Item: " << this->name << endl;
     };
 
     //getter:
-    /*bool getIsValid()const{
-        return isValid;
-    };*/
     string getName()const{
         return name;
     };
@@ -41,9 +38,6 @@ public:
 
 
     //setter:
-    /*void setIsValid(bool isValid){
-        this->isValid = isValid;
-    };*/
     void setName(string& name){
         if(name.size() > 0){
             this->name = name;

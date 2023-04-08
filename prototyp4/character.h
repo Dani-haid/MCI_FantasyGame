@@ -3,6 +3,7 @@
 
 #include "item.h"
 #include "exceptions.h"
+#include <memory>
 
 #define INVENTORY_S 10
 
@@ -69,7 +70,6 @@ public:
     void setHealth(int health){
         if(health < 0){
             health = 0;
-            //throw WrongValueException("setHealth: negativer Wert ist ungültig!");
         }
         this->health = health;
     };

@@ -30,6 +30,11 @@ public:
     using GeneralException::GeneralException;
 };
 
+class FullInventarExceptionHero: public GeneralException{
+public:
+    using GeneralException::GeneralException;
+};
+
 //Fall in übergebenem Index kein Item vorhanden ist. Gibt Fehlermeldung und Index retour
 //evtl. hier auch noch Vererbung von IndexException einbauen
 class EmptySlotException: public GeneralException{
@@ -45,6 +50,11 @@ public:
 };
 
 class WrongValueException: public GeneralException{
+public:
+    using GeneralException::GeneralException;
+};
+
+class NoItemFoundException: public GeneralException{
 public:
     using GeneralException::GeneralException;
 };
