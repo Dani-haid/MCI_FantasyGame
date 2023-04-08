@@ -22,6 +22,7 @@ int main() {
     //Heldin und Gegner erstellen:
     Hero annina("Annina", 300, 50, 50, 15);
     Fighter matthias("Matthias", 50, 0, 3, 88, 100);
+    Sorcerer testiii("Testfighter", 50, 0, 3, 88, -90);
     Sorcerer pascal("Pascal", 100, 500, 9, 77, 8);
 
     //Items am Heap als SmartPointer erstellen:
@@ -94,6 +95,9 @@ int main() {
         cout << "------------" << endl;
     }
 
+    }
+    catch (WrongValueException& e){
+        cerr << e.what() << endl;
     }
     catch (...){
         cout << "unbekannter Fehler aufgetaucht" << endl;

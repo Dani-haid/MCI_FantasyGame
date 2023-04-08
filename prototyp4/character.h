@@ -27,6 +27,12 @@ public:
     //constructor
     Character(const string& name, int health, int gold, int armor, int magicResistance):
     name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+        if(name.size()<1){
+            throw WrongValueException("setName: ungültiger Wert für Name!");
+        }
+        if(health < 0 || gold < 0 || armor < 0 || magicResistance < 0){
+            throw WrongValueException("Constructor: Negative Werte sind ungültig!");
+        }
     }
 
     //destructor

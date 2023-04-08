@@ -10,16 +10,13 @@ class Item{
 private:
     string name;
     int value;
-    //bool isValid;
 
 public:
     //default constructor
     Item():name(""), value(0){};
-    //Item():name(""), value(0), isValid(false){};
 
     //constructor
     Item(const string& name, int value):name(name), value(value){
-        //Item(const string& name, int value):name(name), value(value), isValid(true){
         //cout << "Item " << this->name << " erstellt" << endl;
     }
 
