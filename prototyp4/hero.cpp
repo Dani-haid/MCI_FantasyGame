@@ -26,7 +26,7 @@ void Hero::sellItem(int index){
             throw IndexException("Error: Ungültiger Index in sellItem.", index);
         } else if(!this->inventory[index]){
             throw EmptySlotException("Error: Ungültiger Inventar Slot in sellItem.", index);
-            }else{
+        }else{
             this->gold += this->inventory[index]->getValue();
             cout << "Gegenstand "<< this->inventory[index]->getName() << " wird für " << this->inventory[index]->getValue() <<
                  " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
@@ -81,7 +81,7 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
     int rand_num;
     int i = 0;
     shared_ptr<Item> temp = nullptr;
-    make_shared<Item>();
+    make_shared<Item>();//??
 
 
         while (1){
@@ -129,7 +129,8 @@ shared_ptr<Item> Hero::getEquipment(int index){
     }
     catch (EmptySlotException e){
         cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
-        return nullptr;
+        this->equipment[index].reset();
+        return this->equipment[index];
     }
 };
 
@@ -148,11 +149,12 @@ shared_ptr<Item> Hero::removeEquipmentItem(int slot){
     if(slot < 0 || slot >= EQUIPMENT_S){
         throw IndexException("Error: Ungültiger Index in removeEquipmentItem.", slot);
     }else if(!this->equipment[slot]){
-        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeEquipmentItem.", slot);
+        return nullptr;
+        //throw EmptySlotException("Error: Ungültiger Inventar Slot in removeEquipmentItem.", slot);
     }else{
         shared_ptr<Item> tempItem = this->equipment[slot];
         cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
-        this->equipment[slot].reset(); // = nullptr;
+        this->equipment[slot].reset();
         return tempItem;
     }
 };

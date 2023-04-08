@@ -15,6 +15,8 @@ using namespace std;
 
 int main() {
 
+    try{
+
     srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
     //Heldin und Gegner erstellen:
@@ -41,36 +43,30 @@ int main() {
     shared_ptr<Item> lego = make_shared<Item>("Lego", 30);
     shared_ptr<Item> harpune = make_shared<Item>("Harpune", 60);
 
-    //Items in die jeweiligen Inventare hinzufügen
-        try{
-            annina.addInventarItem(kanone);
-            annina.addInventarItem(gummibaer);
-            annina.addInventarItem(gummibaer2);
-            annina.addInventarItem(gummibaer3);
-            annina.addInventarItem(gummibaer4);
-            annina.addInventarItem(gummibaer5);
-            annina.addInventarItem(gummibaer6);
-            //annina.addInventarItem(gummibaer7);
-            //annina.addInventarItem(gummibaer8);
-            //annina.addInventarItem(gummibaer9);
-            //annina.addInventarItem(gummibaer10);
-        }
-        catch (FullInventarException e){
-            cerr << e.what() << " Heldin hat keinen Platz mehr im Rucksack!" << endl;
-        }
-        try{
-            matthias.addInventarItem(machete);
-        }
-        catch (FullInventarException e){
-            cerr << e.what() << endl;
-        }
-        try{
-        pascal.addInventarItem(lego);
-        pascal.addInventarItem(harpune);
-        }
-        catch (FullInventarException e){
-        cerr << e.what() << endl;
-        }
+
+    annina.addInventarItem(kanone);
+    annina.addInventarItem(gummibaer);
+    annina.addInventarItem(gummibaer2);
+    annina.addInventarItem(gummibaer3);
+    annina.addInventarItem(gummibaer4);
+    annina.addInventarItem(gummibaer5);
+    annina.addInventarItem(gummibaer6);
+    //annina.addInventarItem(gummibaer7);
+    //annina.addInventarItem(gummibaer8);
+    //annina.addInventarItem(gummibaer9);
+    //annina.addInventarItem(gummibaer10);
+
+    matthias.addInventarItem(machete);
+
+    pascal.addInventarItem(lego);
+    pascal.addInventarItem(harpune);
+
+    try{
+        matthias.setGold(-30);
+    }
+    catch (WrongValueException& e){
+        cout << e.what() << endl;
+    }
 
 
     //Kämpfe der Heldin
@@ -123,7 +119,10 @@ int main() {
         exit(1);
     }
      */
-
+    }
+    catch (...){
+        cout << "unbekannter Fehler aufgetaucht" << endl;
+    }
 
     return 0;
 }

@@ -1,7 +1,6 @@
 #include "sorcerer.h"
 
 void Sorcerer::attack(Character& enemy){
-    //cout << "attack " << *this << endl;
     int x = 5, y = 10;
     int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
     int damage = rand_num + this->magicPower - enemy.getMagicResistance();

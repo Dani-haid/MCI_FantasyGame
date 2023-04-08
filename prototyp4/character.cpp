@@ -12,18 +12,19 @@ shared_ptr<Item> Character::getInventory(int index){
             throw IndexException("Error: Ungültiger Index in getInventory.", index);
         }else if(!this->inventory[index]){
             throw EmptySlotException("Error: Ungültiger Inventar Slot in getInventory.", index);
-
         }else{
             return this->inventory[index];
         }
     }
     catch (EmptySlotException e){
         cerr << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
-        return nullptr;
+        this->inventory[index].reset();
+        return this->inventory[index];
     }
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
+    try{
         for (int i = 0; i < INVENTORY_S; ++i) {
             if(!this->inventory[i]){
                 this->inventory[i] = item;
@@ -31,18 +32,25 @@ int Character::addInventarItem(shared_ptr<Item> item){
                 return i;
             }
         }
-        throw FullInventarException("Error: Inventar ist voll.");
+        throw FullInventarException("Error: Inventar ist voll. Gegenstand kann nicht aufgenommen werden.");
+    }
+catch (FullInventarException& e){
+    cout << "addInventarItem: " << e.what() << endl;
+}
 };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {
     if(slot < 0 || slot >= INVENTORY_S){
         throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
-    } else if(!this->inventory[slot]){
-        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
-    }else{
+    }
+    else if(!this->inventory[slot]){
+        return nullptr;
+        //throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
+    }
+    else{
         shared_ptr<Item> tempItem = this->inventory[slot];
         cout << "Gegenstand " << tempItem->getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
-        this->inventory[slot].reset();// = nullptr;
+        this->inventory[slot].reset();
         return tempItem;
     }
 };
