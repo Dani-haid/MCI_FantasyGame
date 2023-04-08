@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "exceptions.h"
 using namespace std;
 
 class Item{
@@ -44,10 +45,19 @@ public:
         this->isValid = isValid;
     };*/
     void setName(string& name){
-        this->name = name;
+        if(name.size() > 0){
+            this->name = name;
+        }else{
+            throw WrongValueException("setName Item: ungültiger Wert für Name!");
+        }
     };
+
     void setValue(int value){
-        this->value = value;
+        if (value >= 0){
+            this->value = value;
+        }else{
+            throw WrongValueException("setValue Item: negativer Wert ist ungültig!");
+        }
     };
 };
 

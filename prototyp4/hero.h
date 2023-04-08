@@ -21,7 +21,7 @@ public:
     //destructor
     virtual ~Hero(){
         cout << this->name << " verabschiedet sich in den Sonnenuntergang." << endl;
-    }; //braucht man hier virtual destructor oder normal?
+    };
 
     virtual void attack(Character& enemy) override;
 

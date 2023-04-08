@@ -44,6 +44,11 @@ public:
     }
 };
 
+class WrongValueException: public GeneralException{
+public:
+    using GeneralException::GeneralException;
+};
+
 
 
 #endif //PROTOTYP4_EXCEPTIONS_H

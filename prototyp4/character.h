@@ -2,6 +2,7 @@
 #define PROTOTYP4_CHARACTER_H
 
 #include "item.h"
+#include "exceptions.h"
 
 #define INVENTORY_S 10
 
@@ -58,29 +59,41 @@ public:
 
     //setter:
     void setName(string name){
-        this->name = name;
+        if(name.size()>0){
+            this->name = name;
+        }else{
+            throw WrongValueException("setName: ungültiger Wert für Name!");
+        }
     };
+
     void setHealth(int health){
         if(health < 0){
             health = 0;
+            //throw WrongValueException("setHealth: negativer Wert ist ungültig!");
         }
         this->health = health;
     };
     void setGold(int gold){
         if(gold >= 0){
             this->gold = gold;
+        }else{
+            throw WrongValueException("setGold: negativer Wert ist ungültig!");
         }
     };
 
     void setArmor(int armor) {
         if(armor >= 0){
             this->armor = armor;
+        }else{
+            throw WrongValueException("setArmor: negativer Wert ist ungültig");
         }
     };
 
     void setMagicResistance(int magicResistance) {
         if(magicResistance >= 0){
             this->magicResistance = magicResistance;
+        }else{
+            throw WrongValueException("setMagicResistance: negativer Wert ist ungültig");
         }
     };
 };

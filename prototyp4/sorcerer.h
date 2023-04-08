@@ -28,6 +28,8 @@ public:
     void setMagicPower(int magicPower) {
         if(magicPower >= 0){
             this->magicPower = magicPower;
+        }else{
+            throw WrongValueException("setMagicPower: negativer Wert ist ungültig!");
         }
     };
 };

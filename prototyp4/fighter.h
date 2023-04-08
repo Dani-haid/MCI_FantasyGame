@@ -30,6 +30,8 @@ public:
     void setStrength(int strength) {
         if(strength >= 0){
             this->strength = strength;
+        }else{
+            throw WrongValueException("setStrength: negativer Wert ist ungültig!");
         }
     };
 };

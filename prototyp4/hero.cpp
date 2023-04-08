@@ -89,7 +89,6 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
             rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
 
             try{
-                //Shared Ptr Rückgabewert bei removeInventarItem
                 temp = enemy.removeInventarItem(rand_num);
             }
             catch(IndexException& e){

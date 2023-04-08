@@ -73,7 +73,6 @@ int main() {
         }
 
 
-
     //Kämpfe der Heldin
     if(!annina.fight(matthias)){
         exit(0);
