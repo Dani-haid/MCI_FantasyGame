@@ -23,9 +23,9 @@ void Hero::attack(Character& enemy){
 
 void Hero::sellItem(int index){
         if(index < 0 || index >= INVENTORY_S) {
-            throw IndexException("Error: Ungültiger Index in sellItem.", index);
+            throw IndexException("Ungültiger Index in sellItem.", index);
         } else if(!this->inventory[index]){
-            throw EmptySlotException("Error: Ungültiger Inventar Slot in sellItem.", index);
+            throw EmptySlotException("Leerer Inventar Slot in sellItem.", index);
         }else{
             this->gold += this->inventory[index]->getValue();
             cout << "Gegenstand "<< this->inventory[index]->getName() << " wird für " << this->inventory[index]->getValue() <<
