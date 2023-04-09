@@ -2,8 +2,6 @@
 #define PROTOTYP3_NPC_H
 
 #include "character.h"
-#include "item.h"
-
 
 class Npc : public Character{
 public:
@@ -11,8 +9,12 @@ public:
     using Character::Character;
 
     //destructor
-    ~Npc(){
-        cout << this->getName() << " reitet in den Saloon." << endl;
+    virtual ~Npc(){
+        if(health > 0){
+            cout << *this << " reitet in den Saloon." << endl;
+        }else{
+            cout << *this << " liegt am Boden und rührt sich nicht mehr." << endl;
+        }
     };
 };
 

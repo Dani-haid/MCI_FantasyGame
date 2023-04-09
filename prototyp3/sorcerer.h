@@ -9,16 +9,15 @@ private:
     int magicPower;
 public:
     //default constructor
-    Sorcerer(){};
+    Sorcerer():magicPower(0){};
 
     //constructor
     Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
     : Npc(name, health, gold, armor, magicResistance), magicPower(magicPower){
-        cout << "Sorcerer " << this->name << " erstellt" << endl;
+        cout << "Sorcerer " << *this << " erstellt" << endl;
     };
 
-    //destructor
-    virtual ~Sorcerer(){};
+    //destructor in NPC
 
     virtual void attack(Character& enemy) override;
 

@@ -15,11 +15,10 @@ public:
     //constructor
     Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength)
     : Npc(name, health, gold, armor, magicResistance), strength(strength){
-        cout << "Fighter " << this->name << " erstellt" << endl;
+        cout << "Fighter " << *this << " erstellt" << endl;
     };
 
-    //destructor
-    virtual ~Fighter(){};
+    //destructor in NPC
 
     virtual void attack(Character& enemy) override;
 

@@ -7,16 +7,14 @@
 
 using namespace std;
 
-class Hero;//forward declaration
-
 class Character{
 protected:
     string name;
     int health;
     int gold;
-    Item inventory[INVENTORY_S];
     int armor;
     int magicResistance;
+    Item inventory[INVENTORY_S];
 
 public:
     //default constructor
@@ -24,20 +22,19 @@ public:
 
     //constructor
     Character(const string& name, int health, int gold, int armor, int magicResistance):
-    name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
-    }
+    name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){};
 
     //destructor
     virtual ~Character(){};
 
     virtual void attack(Character& character) = 0;
 
+    Item getInventory(int index);
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
-    Item getInventory(int index);
 
     //getter:
-    string getName() const{
+    const string& getName() const{
         return name;
     };
     int getHealth() const{
@@ -57,7 +54,7 @@ public:
 
 
     //setter:
-    void setName(string name){
+    void setName(const string& name){
         this->name = name;
     };
     void setHealth(int health){

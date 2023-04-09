@@ -49,5 +49,9 @@ public:
     };
 };
 
+ostream& operator<<(ostream& out, const Item* h);
+ostream& operator<<(ostream& out, const Item& h);
+
+
 
 #endif //PROTOTYP3_ITEM_H

@@ -11,15 +11,14 @@ Item Character::getInventory(int index){
             return this->inventory[index];
         }
     }
-    Item item;
-    return item;
+    return Item();
 };
 
 int Character::addInventarItem(const Item& item){
     for (int i = 0; i < INVENTORY_S; ++i) {
         //check ob der Platz im Inventar frei ist:
-        if(!(this->inventory[i].getIsValid())){
-            this->inventory[i] = item;
+        if(!(inventory[i].getIsValid())){
+            inventory[i] = item;
             //cout << "Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
             return i;
         }
@@ -29,14 +28,12 @@ int Character::addInventarItem(const Item& item){
 };
 
 Item Character::removeInventarItem(int slot) {
-    if(slot >= 0 && slot < INVENTORY_S && this->inventory[slot].getIsValid()){
-        Item tempItem = this->inventory[slot];
-        this->inventory[slot].setIsValid(false);
-        //cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Inventar von " << this->getName() << " entfernt." << endl;
+    if(slot >= 0 && slot < INVENTORY_S && inventory[slot].getIsValid()){
+        Item tempItem = inventory[slot];
+        inventory[slot].setIsValid(false);
         return tempItem;
     }
-    Item tempItem;
-    return tempItem;
+    return Item();
 };
 
 ostream& operator<<(ostream& out, const Character& c){

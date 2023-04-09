@@ -7,7 +7,6 @@
 using namespace std;
 
 void Hero::attack(Character& enemy){
-    //cout << "attack " << *this << endl;
     int x = 15, y = 25;
     int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
 
@@ -17,18 +16,17 @@ void Hero::attack(Character& enemy){
     }else{
         cout << "Angriff von " << *this << " war wirkungslos" << endl;
     }
-    cout << *this << " trifft " << enemy.getName() << " für " << damage << " Lebenspunkte! "
-    << enemy.getName() << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte." << endl;
+    cout << *this << " trifft " << enemy << " für " << damage << " Lebenspunkte! "
+    << enemy << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte." << endl;
 };
 
 void Hero::sellItem(int index){
     if(index >= 0 && index < INVENTORY_S){
-        if(this->inventory[index].getIsValid()){
-            this->gold += this->inventory[index].getValue();
-            this->inventory[index].setIsValid(false);
-
-            cout << "Gegenstand "<< this->inventory[index].getName() << " wird für " << this->inventory[index].getValue() <<
-                 " verkauft." << *this << " besitzt nun " << this->gold << " Gold." << endl;
+        if(inventory[index].getIsValid()){
+            gold += inventory[index].getValue();
+            cout << inventory[index] << " wird für " << inventory[index].getValue() <<
+                 " verkauft." << *this << " besitzt nun " << gold << " Gold." << endl;
+            inventory[index].setIsValid(false);
         }
     }
 };
@@ -58,8 +56,7 @@ bool Hero::fight(Character &enemy){
 
             if(stolenLoot.getIsValid()){
                 this->addInventarItem(stolenLoot);
-                cout << *this << " stiehlt " << enemy.getName() << " die Waffe: "
-                << stolenLoot.getName() << " im Wert von " << stolenLoot.getValue() << " Gold." << endl;
+                cout << *this << " stiehlt " << enemy << " " << stolenLoot << " im Wert von " << stolenLoot.getValue() << " Gold." << endl;
             };
             return true;//Heldin hat Kampf gewonnen
         }
@@ -94,19 +91,18 @@ Item Hero::retrieveRandomLoot(Character &enemy){
 
 Item Hero::getEquipment(int index){
     if(index >= 0 && index < EQUIPMENT_S){
-        if(this->equipment[index].getIsValid()){
-            return this->equipment[index];
+        if(equipment[index].getIsValid()){
+            return equipment[index];
         }
     }
-    Item item;
-    return item;
+    return Item();
 };
 
 int Hero::addEquipmentItem(const Item& item){
     for (int i = 0; i < EQUIPMENT_S; ++i) {
-        if(!(this->equipment[i].getIsValid())){
-            this->equipment[i] = item;
-            cout << "Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
+        if(!(equipment[i].getIsValid())){
+            equipment[i] = item;
+            cout << "Gegenstand " << equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt." << endl;
             return i;
         }
     }
@@ -116,13 +112,12 @@ int Hero::addEquipmentItem(const Item& item){
 
 Item Hero::removeEquipmentItem(int slot){
     if(slot >= 0 && slot < EQUIPMENT_S && this->equipment[slot].getIsValid()){
-        Item tempItem = this->equipment[slot];
-        this->equipment[slot].setIsValid(false);
+        Item tempItem = equipment[slot];
         cout << "Gegenstand " << tempItem.getName() << " an Stelle " << slot << " wurde aus dem Equipment der Heldin entfernt." << endl;
+        equipment[slot].setIsValid(false);
         return tempItem;
     }
-    Item tempItem;
-    return tempItem;
+    return Item();
 };
 
 ostream& operator<<(ostream& out, const Hero& h){
