@@ -4,7 +4,7 @@ BINARY = prototyp4
 # Directory
 BUILDDIR = build
 # Object files
-OBJS   = main.o character.o hero.o fighter.o sorcerer.o
+OBJS   = main.o character.o hero.o fighter.o sorcerer.o item.o
 # Compiler flags
 CFLAGS = -Werror -Wall
 # Linker flags

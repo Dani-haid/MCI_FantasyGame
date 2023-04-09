@@ -49,11 +49,13 @@ public:
     }
 };
 
+//Wenn ein ungültiger Wert übergeben wird
 class WrongValueException: public GeneralException{
 public:
     using GeneralException::GeneralException;
 };
 
+//Fall bei der Suche nach einem gültigen Gegenstand im Inventar nichts gefunden wird
 class NoItemFoundException: public GeneralException{
 public:
     using GeneralException::GeneralException;

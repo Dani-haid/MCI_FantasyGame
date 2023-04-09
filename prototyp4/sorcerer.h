@@ -9,7 +9,7 @@ private:
     int magicPower;
 public:
     //default constructor
-    Sorcerer(){};
+    Sorcerer():magicPower(0){};
 
     //constructor
     Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
@@ -17,11 +17,10 @@ public:
         if(magicPower < 0){
             throw WrongValueException("Constructor: Negative Werte sind ungültig!");
         }
-        cout << "Sorcerer " << this->name << " erstellt" << endl;
+        cout << "Sorcerer " << *this << " erstellt" << endl;
     };
 
-    //destructor
-    virtual ~Sorcerer(){};
+    //destructor in NPC
 
     virtual void attack(Character& enemy) override;
 

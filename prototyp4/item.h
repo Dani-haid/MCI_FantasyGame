@@ -21,9 +21,7 @@ public:
     }
 
     //destructor
-    ~Item(){
-        //cout << "destructor Item: " << this->name << endl;
-    };
+    //~Item(){cout << "destructor Item: " << this->name << endl;};
 
     //getter:
     string getName()const{
@@ -51,6 +49,9 @@ public:
         }
     };
 };
+
+ostream& operator<<(ostream& out, const Item* h);
+ostream& operator<<(ostream& out, const Item& h);
 
 
 #endif //PROTOTYP4_ITEM_H

@@ -7,11 +7,11 @@
 
      if(damage > 0){
          enemy.setHealth(enemy.getHealth()-damage);
-         cout << *this << " trifft " << enemy.getName() << " für " << damage << " Lebenspunkte!"
-              << enemy.getName() << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte."  << endl;
+         cout << *this << " trifft " << enemy << " für " << damage << " Lebenspunkte!"
+              << enemy << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte."  << endl;
      }else{
          cout << "Angriff von " << *this << " war wirkungslos. "
-         << enemy.getName() << " besitzt weiterhin " << enemy.getHealth() << " Lebenspunkte." << endl;
+         << enemy << " besitzt weiterhin " << enemy.getHealth() << " Lebenspunkte." << endl;
      }
 
 

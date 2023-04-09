@@ -18,11 +18,10 @@ public:
         if(strength < 0){
             throw WrongValueException("Constructor: Negative Werte sind ungültig!");
         }
-        cout << "Fighter " << this->name << " erstellt" << endl;
+        cout << "Fighter " << *this << " erstellt" << endl;
     };
 
-    //destructor
-    virtual ~Fighter(){};
+    //destructor in NPC
 
     virtual void attack(Character& enemy) override;
 

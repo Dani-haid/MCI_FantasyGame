@@ -9,8 +9,6 @@
 
 using namespace std;
 
-class Hero;//forward declaration
-
 class Character{
 protected:
     string name;
@@ -45,7 +43,7 @@ public:
     shared_ptr<Item> getInventory(int index);
 
     //getter:
-    string getName() const{
+    const string &getName() const{
         return name;
     };
     int getHealth() const{
@@ -65,7 +63,7 @@ public:
 
 
     //setter:
-    void setName(string name){
+    void setName(const string& name){
         if(name.size()>0){
             this->name = name;
         }else{
