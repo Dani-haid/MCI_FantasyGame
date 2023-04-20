@@ -8,19 +8,14 @@
 
 class Hero : public Character{
 private:
-    shared_ptr<Item> equipment[EQUIPMENT_S] = {};
+    shared_ptr<Item> equipment[EQUIPMENT_S];
 
 public:
     //constructor
-    Hero(const string& name, int health, int gold, int armor, int magicResistance):
-    Character(name, health, gold, armor, magicResistance){
-        cout << "Heldin " << *this << " erstellt" << endl;
-    }
+    Hero(const string& name, int health, int gold, int armor, int magicResistance);
 
     //destructor
-    virtual ~Hero(){
-        cout << *this << " verabschiedet sich in den Sonnenuntergang." << endl;
-    };
+    virtual ~Hero();
 
     virtual void attack(Character& enemy) override;
 

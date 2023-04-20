@@ -3,6 +3,11 @@
 
 using namespace std;
 
+//constructor
+Item::Item(const string& name, int value):name(name), value(value){
+    //cout << "Item " << this->name << " erstellt" << endl;
+}
+
 ostream& operator<<(ostream& out, const Item* h){
     out << "Gegenstand " << h->getName();
     return out;

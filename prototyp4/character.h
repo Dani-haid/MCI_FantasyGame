@@ -4,6 +4,7 @@
 #include "item.h"
 #include "exceptions.h"
 #include <memory>
+#include <cstring>
 
 #define INVENTORY_S 10
 
@@ -14,7 +15,7 @@ protected:
     string name;
     int health;
     int gold;
-    shared_ptr<Item> inventory[INVENTORY_S] = {}; //zuerst alle mit nullptr initialisieren
+    shared_ptr<Item> inventory[INVENTORY_S];
     int armor;
     int magicResistance;
 
@@ -23,15 +24,7 @@ public:
     Character():name(""), health(0), gold(0), armor(0), magicResistance(0){};
 
     //constructor
-    Character(const string& name, int health, int gold, int armor, int magicResistance):
-    name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
-        if(name.size()<1){
-            throw WrongValueException("setName: ungültiger Wert für Name!");
-        }
-        if(health < 0 || gold < 0 || armor < 0 || magicResistance < 0){
-            throw WrongValueException("Constructor: Negative Werte sind ungültig!");
-        }
-    }
+    Character(const string& name, int health, int gold, int armor, int magicResistance);
 
     //destructor
     virtual ~Character(){};

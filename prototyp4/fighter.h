@@ -9,17 +9,8 @@ private:
     int strength;
 
 public:
-    //default constructor
-    Fighter():strength(0){};
-
     //constructor
-    Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength)
-    : Npc(name, health, gold, armor, magicResistance), strength(strength){
-        if(strength < 0){
-            throw WrongValueException("Constructor: Negative Werte sind ungültig!");
-        }
-        cout << "Fighter " << *this << " erstellt" << endl;
-    };
+    Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength);
 
     //destructor in NPC
 

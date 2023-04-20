@@ -6,8 +6,19 @@
 
 using namespace std;
 
+//constructor
+Character::Character(const string& name, int health, int gold, int armor, int magicResistance):
+        name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+    if(name.size()<1){
+        throw WrongValueException("setName: ungültiger Wert für Name!");
+    }
+    if(health < 0 || gold < 0 || armor < 0 || magicResistance < 0){
+        throw WrongValueException("Constructor: Negative Werte sind ungültig!");
+    }
+    memset(inventory, 0, sizeof (inventory));
+}
+
 shared_ptr<Item> Character::getInventory(int index){
-    try{
         if(index < 0 || index >= INVENTORY_S){
             throw IndexException("Error: Ungültiger Index in getInventory.", index);
         }else if(!inventory[index]){
@@ -15,16 +26,9 @@ shared_ptr<Item> Character::getInventory(int index){
         }else{
             return inventory[index];
         }
-    }
-    catch (EmptySlotException& e){
-        cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
-        inventory[index].reset();
-        return inventory[index];
-    }
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
-    try{
         for (int i = 0; i < INVENTORY_S; ++i) {
             if(!this->inventory[i]){
                 this->inventory[i] = item;
@@ -32,12 +36,7 @@ int Character::addInventarItem(shared_ptr<Item> item){
                 return i;
             }
         }
-        throw FullInventarException("Error: Inventar ist voll. Folgender Gegenstand kann nicht aufgenommen werden: ");
-    }
-    catch (FullInventarException& e){
-        cout << "addInventarItem: " << e.what() << item << endl;
-        return -1;
-    }
+        throw FullInventarException("Error: Inventar ist voll. Gegenstand kann nicht aufgenommen werden.");
 };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {
@@ -45,9 +44,7 @@ shared_ptr<Item> Character::removeInventarItem(int slot) {
         throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
     }
     else if(!inventory[slot]){
-        return shared_ptr<Item>();
-        return nullptr;
-        //throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
+        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
     }
     else{
         shared_ptr<Item> tempItem = inventory[slot];

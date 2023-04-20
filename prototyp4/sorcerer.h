@@ -8,17 +8,8 @@ class Sorcerer : public Npc{
 private:
     int magicPower;
 public:
-    //default constructor
-    Sorcerer():magicPower(0){};
-
     //constructor
-    Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
-    : Npc(name, health, gold, armor, magicResistance), magicPower(magicPower){
-        if(magicPower < 0){
-            throw WrongValueException("Constructor: Negative Werte sind ungültig!");
-        }
-        cout << "Sorcerer " << *this << " erstellt" << endl;
-    };
+    Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower);
 
     //destructor in NPC
 

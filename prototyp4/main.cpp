@@ -49,11 +49,11 @@ int main() {
     annina.addInventarItem(gummibaer3);
     annina.addInventarItem(gummibaer4);
     annina.addInventarItem(gummibaer5);
-    /*annina.addInventarItem(gummibaer6);
+    annina.addInventarItem(gummibaer6);
     annina.addInventarItem(gummibaer7);
     annina.addInventarItem(gummibaer8);
-    annina.addInventarItem(gummibaer9);
-    annina.addInventarItem(gummibaer10);*/
+        /*annina.addInventarItem(gummibaer9);
+        annina.addInventarItem(gummibaer10);*/
 
     matthias.addInventarItem(machete);
 

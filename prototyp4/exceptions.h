@@ -6,9 +6,9 @@ using namespace std;
 
 
 //Übergeordnete Exception Klasse um benutzerdefinierte Fehlermeldungen auszugeben
-class GeneralException: public std::runtime_error{
+class GeneralException: public runtime_error{
 public:
-    using std::runtime_error::runtime_error;
+    using runtime_error::runtime_error;
 };
 
 //Fall falscher Index eingegeben wurde. Gibt Fehlermeldung und Index retour

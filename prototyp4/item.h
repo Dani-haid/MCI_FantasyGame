@@ -12,16 +12,8 @@ private:
     int value;
 
 public:
-    //default constructor
-    Item():name(""), value(0){};
-
     //constructor
-    Item(const string& name, int value):name(name), value(value){
-        //cout << "Item " << this->name << " erstellt" << endl;
-    }
-
-    //destructor
-    //~Item(){cout << "destructor Item: " << this->name << endl;};
+    Item(const string& name, int value);
 
     //getter:
     string getName()const{

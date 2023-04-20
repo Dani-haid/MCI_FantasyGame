@@ -1,6 +1,15 @@
 #include "sorcerer.h"
 #include <iostream>
 
+//constructor
+Sorcerer::Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
+        : Npc(name, health, gold, armor, magicResistance), magicPower(magicPower){
+    if(magicPower < 0){
+        throw WrongValueException("Constructor: Negative Werte sind ungültig!");
+    }
+    cout << "Sorcerer " << *this << " erstellt" << endl;
+};
+
 void Sorcerer::attack(Character& enemy){
     int x = 5, y = 10;
     int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
