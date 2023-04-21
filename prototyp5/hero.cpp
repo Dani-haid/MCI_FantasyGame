@@ -11,7 +11,7 @@ using namespace std;
 Hero::Hero(const string& name, int health, int gold, int armor, int magicResistance):
         Character(name, health, gold, armor, magicResistance){
     memset(equipment, 0, sizeof (equipment));
-    cout << "Heldin " << *this << " erstellt" << endl;
+    cout << *this << " erstellt" << endl;
 }
 
 //destructor

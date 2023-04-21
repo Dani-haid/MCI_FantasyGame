@@ -6,7 +6,7 @@ Fighter::Fighter(const string& name, int health, int gold, int armor, int magicR
     if(strength < 0){
         throw WrongValueException("Constructor: Negative Werte sind ungültig!");
     }
-    cout << "Fighter " << *this << " erstellt" << endl;
+    cout << *this << " erstellt" << endl;
 };
 
  void Fighter::attack(Character& enemy){

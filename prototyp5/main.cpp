@@ -9,6 +9,7 @@
 #include <string>
 #include "exceptions.h"
 #include <memory>
+#include "game.h"
 
 using namespace std;
 
@@ -19,10 +20,13 @@ int main() {
 
     srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
 
+    Game game;
+    game.add(new Hero("DANI", 55, 22, 45, 245));
+    game.add(new Fighter("Horst", 34, 25, 33, 46, 33));
+
     //Heldin und Gegner erstellen:
     Hero annina("Annina", 300, 50, 50, 15);
     Fighter matthias("Matthias", 50, 0, 3, 88, 100);
-    //Sorcerer testiii("Testfighter", 50, 0, 3, 88, -90);
     Sorcerer pascal("Pascal", 100, 500, 9, 77, 8);
 
     //Items am Heap als SmartPointer erstellen:
