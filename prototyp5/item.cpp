@@ -16,3 +16,8 @@ ostream& operator<<(ostream& out, const Item& h){
     out << "Gegenstand " << h.getName();
     return out;
 };
+
+ostream& operator<<(ostream& out, const shared_ptr<Item> h){
+    out << "Gegenstand " << h->getName();
+    return out;
+}

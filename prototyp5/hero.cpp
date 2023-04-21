@@ -34,15 +34,19 @@ void Hero::attack(Character& enemy){
 };
 
 void Hero::sellItem(int index){
-        if(index < 0 || index >= INVENTORY_S) {
+        if(index < 0) {
             throw IndexException("Ungültiger Index in sellItem.", index);
-        } else if(!inventory[index]){
+        } else if(!inventory[index]) {
             throw EmptySlotException("Leerer Inventar Slot in sellItem.", index);
-        }else{
+        }
+        else if(index >= inventory.size()){
+            throw EmptyInventarException("Inventar ist leer in sellItem.");
+        }
+        else{
             gold += inventory[index]->getValue();
             cout << inventory[index] << " wird für " << inventory[index]->getValue() <<
                  " verkauft. " << *this << " besitzt nun " << gold << " Gold." << endl;
-            inventory[index].reset();
+            inventory.erase(inventory.begin()+index);
         }
 };
 
@@ -93,13 +97,15 @@ shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
 
     for(int i = 0; i <= 30; i++){
         //rand_num = 8;//testvariable
-        rand_num = rand()%INVENTORY_S; //zufälliger Slot (Zahl zwischen 0-9)
+        rand_num = rand() % 10; //zufälliger Slot (Zahl zwischen 0-9)
 
         try{
             temp = enemy.removeInventarItem(rand_num);
             return temp;
         }
         catch (EmptySlotException& e){
+        }
+        catch(EmptyInventarException& e){
         }
     }
     throw NoItemFoundException(" Kein Item im Inventar des Characters gefunden.");

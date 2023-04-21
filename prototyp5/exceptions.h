@@ -30,7 +30,8 @@ public:
     using GeneralException::GeneralException;
 };
 
-class FullInventarExceptionHero: public GeneralException{
+//Fall Inventar komplett leer ist (z.B. bei SellItem)
+class EmptyInventarException: public GeneralException{
 public:
     using GeneralException::GeneralException;
 };

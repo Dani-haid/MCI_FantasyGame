@@ -44,21 +44,22 @@ int main() {
 
 
     annina.addInventarItem(kanone);
-    annina.addInventarItem(gummibaer);
-    annina.addInventarItem(gummibaer2);
-    annina.addInventarItem(gummibaer3);
-    annina.addInventarItem(gummibaer4);
-    annina.addInventarItem(gummibaer5);
-    annina.addInventarItem(gummibaer6);
-    annina.addInventarItem(gummibaer7);
-    annina.addInventarItem(gummibaer8);
-        /*annina.addInventarItem(gummibaer9);
-        annina.addInventarItem(gummibaer10);*/
+        annina.addInventarItem(gummibaer);
+        annina.addInventarItem(gummibaer2);
+        annina.addInventarItem(gummibaer3);
+        annina.addInventarItem(gummibaer4);
+        /*annina.addInventarItem(gummibaer5);
+        annina.addInventarItem(gummibaer6);
+        annina.addInventarItem(gummibaer7);
+        annina.addInventarItem(gummibaer8);
+            annina.addInventarItem(gummibaer9);
+            annina.addInventarItem(gummibaer10);*/
 
     matthias.addInventarItem(machete);
 
     pascal.addInventarItem(lego);
     pascal.addInventarItem(harpune);
+
 
     try{
         matthias.setGold(-30);
@@ -81,6 +82,21 @@ int main() {
     if(annina.getHealth() >= 0){
         cout << "------------" << endl;
         cout << "Heldin verkauft ihre Gegenstände!"<< endl;
+        while(1){
+            try{
+                annina.sellItem(0);
+            }
+            catch(IndexException& e){
+                cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
+            }
+            catch(EmptySlotException& e){
+                cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
+            }
+            catch(EmptyInventarException& e){
+                break;
+            }
+        }
+        /*
         for (int i = 0; i < INVENTORY_S; ++i) {
             try{
                 annina.sellItem(i);
@@ -91,7 +107,7 @@ int main() {
             catch(EmptySlotException& e){
                 cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
             }
-        }
+        }*/
         cout << "------------" << endl;
     }
 

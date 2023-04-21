@@ -44,6 +44,7 @@ public:
 
 ostream& operator<<(ostream& out, const Item* h);
 ostream& operator<<(ostream& out, const Item& h);
+ostream& operator<<(ostream& out, const shared_ptr<Item> h);
 
 
 #endif //PROTOTYP4_ITEM_H

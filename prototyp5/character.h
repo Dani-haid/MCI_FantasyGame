@@ -5,6 +5,7 @@
 #include "exceptions.h"
 #include <memory>
 #include <cstring>
+#include <vector>
 
 #define INVENTORY_S 10
 
@@ -15,7 +16,7 @@ protected:
     string name;
     int health;
     int gold;
-    shared_ptr<Item> inventory[INVENTORY_S];
+    vector<shared_ptr<Item>> inventory;
     int armor;
     int magicResistance;
 
