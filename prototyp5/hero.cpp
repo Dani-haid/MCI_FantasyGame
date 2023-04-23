@@ -8,8 +8,8 @@
 using namespace std;
 
 //constructor
-Hero::Hero(const string& name, int health, int gold, int armor, int magicResistance):
-        Character(name, health, gold, armor, magicResistance){
+Hero::Hero(Game* manager, const string& name, int health, int gold, int armor, int magicResistance):
+        Character(manager, name, health, gold, armor, magicResistance){
     memset(equipment, 0, sizeof (equipment));
     cout << *this << " erstellt" << endl;
 }
@@ -46,6 +46,7 @@ void Hero::sellItem(int index){
             gold += inventory[index]->getValue();
             cout << inventory[index] << " wird für " << inventory[index]->getValue() <<
                  " verkauft. " << *this << " besitzt nun " << gold << " Gold." << endl;
+            manager->addSoldItem(inventory[index]);
             inventory.erase(inventory.begin()+index);
         }
 };
@@ -82,10 +83,12 @@ bool Hero::fight(Character &enemy){
             catch (NoItemFoundException& e){
                 cout << "fight: " << enemy << e.what() << endl;
             }
+            manager->removeCharacter(enemy.getName());
             return true;//Heldin hat Kampf gewonnen
         }else{
             cout << "Game Over!" << endl;
             cout << *this << " wurde besiegt! " << enemy << " hat noch " << enemy.getHealth() << " Lebenspunkte übrig!" << endl;
+            manager->removeCharacter(this->getName());
             return false;//Heldin hat Kampf verloren
         }
 };

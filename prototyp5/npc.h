@@ -11,6 +11,7 @@ public:
 
     //destructor
     virtual ~Npc(){
+        cout << "Dest: ";
         if(health > 0){
             cout << *this << " reitet in den Saloon." << endl;
         }else{

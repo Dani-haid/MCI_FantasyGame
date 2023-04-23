@@ -2,12 +2,12 @@
 #include <iostream>
 
 //constructor
-Sorcerer::Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
-        : Npc(name, health, gold, armor, magicResistance), magicPower(magicPower){
+Sorcerer::Sorcerer(Game* manager, const string& name, int health, int gold, int armor, int magicResistance, int magicPower)
+        : Npc(manager, name, health, gold, armor, magicResistance), magicPower(magicPower){
     if(magicPower < 0){
         throw WrongValueException("Constructor: Negative Werte sind ungültig!");
     }
-    cout << "Sorcerer " << *this << " erstellt" << endl;
+    cout <<  *this << " erstellt" << endl;
 };
 
 void Sorcerer::attack(Character& enemy){

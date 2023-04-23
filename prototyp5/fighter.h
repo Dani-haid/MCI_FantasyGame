@@ -10,7 +10,7 @@ private:
 
 public:
     //constructor
-    Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength);
+    Fighter(Game* manager, const string& name, int health, int gold, int armor, int magicResistance, int strength);
 
     //destructor in NPC
 

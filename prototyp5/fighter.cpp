@@ -1,8 +1,8 @@
 #include "fighter.h"
 
 //constructor
-Fighter::Fighter(const string& name, int health, int gold, int armor, int magicResistance, int strength)
-        : Npc(name, health, gold, armor, magicResistance), strength(strength){
+Fighter::Fighter(Game* manager, const string& name, int health, int gold, int armor, int magicResistance, int strength)
+        : Npc(manager, name, health, gold, armor, magicResistance), strength(strength){
     if(strength < 0){
         throw WrongValueException("Constructor: Negative Werte sind ungültig!");
     }

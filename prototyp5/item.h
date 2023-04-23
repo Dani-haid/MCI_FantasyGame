@@ -15,6 +15,10 @@ public:
     //constructor
     Item(const string& name, int value);
 
+    ~Item(){
+        cout << "Item " << this->getName() << " wurde zerstört." << endl;
+    }
+
     //getter:
     string getName()const{
         return name;

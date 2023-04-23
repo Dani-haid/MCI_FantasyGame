@@ -3,11 +3,10 @@
 
 #include "item.h"
 #include "exceptions.h"
+#include "game.h"
 #include <memory>
 #include <cstring>
 #include <vector>
-
-#define INVENTORY_S 10
 
 using namespace std;
 
@@ -19,13 +18,14 @@ protected:
     vector<shared_ptr<Item>> inventory;
     int armor;
     int magicResistance;
+    Game* manager;
 
 public:
     //default constructor
     Character():name(""), health(0), gold(0), armor(0), magicResistance(0){};
 
     //constructor
-    Character(const string& name, int health, int gold, int armor, int magicResistance);
+    Character(Game* manager, const string& name, int health, int gold, int armor, int magicResistance);
 
     //destructor
     virtual ~Character(){};

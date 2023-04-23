@@ -7,8 +7,8 @@
 using namespace std;
 
 //constructor
-Character::Character(const string& name, int health, int gold, int armor, int magicResistance):
-        name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+Character::Character(Game* manager, const string& name, int health, int gold, int armor, int magicResistance):
+        manager(manager), name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
     if(name.size()<1){
         throw WrongValueException("setName: ungültiger Wert für Name!");
     }
@@ -48,7 +48,6 @@ shared_ptr<Item> Character::removeInventarItem(int slot) {
         shared_ptr<Item> tempItem = inventory[slot];
         cout << tempItem << " an Stelle " << slot << " wurde aus dem Inventar von " << *this << " entfernt." << endl;
         inventory.erase(inventory.begin()+slot); //Item wird gelöscht
-        //inventory[slot].reset();
         return tempItem;
     }
 };

@@ -3,6 +3,8 @@
 
 #include <map>
 #include <iostream>
+#include <vector>
+#include "item.h"
 
 using namespace std;
 
@@ -10,7 +12,8 @@ class Character;
 
 class Game{
 private:
-    map<string, Character*> characters;
+    map<string, shared_ptr<Character>> characters; //Pointer auf erstellte Character
+    vector<shared_ptr<Item>> soldItems; //Gegenstände, die sich nicht im Inventar eines Charakters befinden
 
 public:
     //wenn kein eigener constructor definiert ist, wird der default constructor aufgerufen
@@ -20,19 +23,22 @@ public:
     ~Game(){
         cout << "destructor Game " << endl;
 
-        for (auto [key, value] : characters) {
-            cout << key << " : " << value << endl;
-        }
-
-        characters.clear();
+        /*for (auto it = characters.begin(); it != characters.end(); it++) {
+            cout << " Key : " << it->first
+                 << " , Value : " << it->second
+                 << endl;
+        }*/
     };
-    //muss ich auch alles manuell zerstören wenn ich smart pointer verwende?
 
     void play();
 
-    void add(Character* character);
+    void addCharacter(shared_ptr<Character> character);
 
-    void tempMapOutput();
+    void removeCharacter(const string& name);
+
+    void addSoldItem(shared_ptr<Item> item);
+
+    void printMapOutput();
 };
 
 #endif //PROTOTYP5_GAME_H

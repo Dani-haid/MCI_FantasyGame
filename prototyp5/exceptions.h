@@ -62,6 +62,17 @@ public:
     using GeneralException::GeneralException;
 };
 
+//zur Überprüfung fall key in maps bereits vorhanden ist
+class NoUniqueCharacterKeyException: public GeneralException{
+public:
+    using GeneralException::GeneralException;
+};
+
+//zur Überprüfung fall KEIN passender Key vorhanden
+class NoExistingCharacterKeyException: public GeneralException{
+public:
+    using GeneralException::GeneralException;
+};
 
 
 #endif //PROTOTYP4_EXCEPTIONS_H

@@ -9,7 +9,7 @@ private:
     int magicPower;
 public:
     //constructor
-    Sorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower);
+    Sorcerer(Game* manager, const string& name, int health, int gold, int armor, int magicResistance, int magicPower);
 
     //destructor in NPC
 

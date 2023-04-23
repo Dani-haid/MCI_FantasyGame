@@ -12,7 +12,7 @@ private:
 
 public:
     //constructor
-    Hero(const string& name, int health, int gold, int armor, int magicResistance);
+    Hero(Game* manager, const string& name, int health, int gold, int armor, int magicResistance);
 
     //destructor
     virtual ~Hero();
