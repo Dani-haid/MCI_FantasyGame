@@ -3,6 +3,7 @@
 
 #include "item.h"
 #include "character.h"
+#include <memory>
 
 #define EQUIPMENT_S 2
 

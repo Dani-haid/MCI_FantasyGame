@@ -10,7 +10,7 @@ using namespace std;
 //constructor
 Hero::Hero(Game* manager, const string& name, int health, int gold, int armor, int magicResistance):
         Character(manager, name, health, gold, armor, magicResistance){
-    memset(equipment, 0, sizeof (equipment));
+    memset(&equipment, 0, sizeof (equipment));
     cout << *this << " erstellt" << endl;
 }
 
@@ -39,7 +39,7 @@ void Hero::sellItem(int index){
         } else if(!inventory[index]) {
             throw EmptySlotException("Leerer Inventar Slot in sellItem.", index);
         }
-        else if(index >= inventory.size()){
+        else if(index >= (int)inventory.size()){
             throw EmptyInventarException("Inventar ist leer in sellItem.");
         }
         else{

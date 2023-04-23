@@ -1,5 +1,5 @@
 #include "game.h"
-#include "character.h"
+//#include "character.h"
 #include "hero.h"
 #include "fighter.h"
 #include "sorcerer.h"

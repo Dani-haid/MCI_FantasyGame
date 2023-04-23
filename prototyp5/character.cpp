@@ -7,8 +7,8 @@
 using namespace std;
 
 //constructor
-Character::Character(Game* manager, const string& name, int health, int gold, int armor, int magicResistance):
-        manager(manager), name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+Character::Character(Game* manager, const string& name, int health, int gold, int armor, int magicResistance)
+    : manager(manager), name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
     if(name.size()<1){
         throw WrongValueException("setName: ungültiger Wert für Name!");
     }
@@ -18,7 +18,7 @@ Character::Character(Game* manager, const string& name, int health, int gold, in
 }
 
 shared_ptr<Item> Character::getInventory(int index){
-        if(index < 0 || index > inventory.size()){
+        if(index < 0 || index > (int)inventory.size()){
             throw IndexException("Error: Ungültiger Index in getInventory.", index);
         }else if(!inventory[index]){
             throw EmptySlotException("Error: Ungültiger Inventar Slot in getInventory.", index);
@@ -41,7 +41,7 @@ shared_ptr<Item> Character::removeInventarItem(int slot) {
     else if(!inventory[slot]){
         throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
     }
-    else if(slot >= inventory.size()){
+    else if(slot >= (int)inventory.size()){
         throw EmptyInventarException("Inventar ist leer in removeInventarItem.");
     }
     else{

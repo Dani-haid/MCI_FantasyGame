@@ -11,7 +11,7 @@ using namespace std;
 class Character;
 
 class Game{
-private:
+protected:
     map<string, shared_ptr<Character>> characters; //Pointer auf erstellte Character
     vector<shared_ptr<Item>> soldItems; //Gegenstände, die sich nicht im Inventar eines Charakters befinden
 

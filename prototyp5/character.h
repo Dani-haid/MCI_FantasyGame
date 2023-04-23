@@ -10,15 +10,18 @@
 
 using namespace std;
 
+//forward declaration
+class Game;
+
 class Character{
 protected:
+    Game* manager;
     string name;
     int health;
     int gold;
     vector<shared_ptr<Item>> inventory;
     int armor;
     int magicResistance;
-    Game* manager;
 
 public:
     //default constructor
