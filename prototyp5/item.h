@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 #include "exceptions.h"
+#include <memory>
+
 using namespace std;
 
 class Item{
