@@ -18,16 +18,25 @@ int main() {
 
     try{
 
-    srand(std::time(nullptr));//Damit random Number im unterschiedlich ist
+    srand(std::time(nullptr));//Damit random Number immer unterschiedlich ist
 
-    Game game;
-    game.add(new Hero("DANI", 55, 22, 45, 245));
-    game.add(new Fighter("Horst", 34, 25, 33, 46, 33));
+    Game game1;
+    game1.play();
+
+    //Hero* Baer = new Hero("Baer", 44, 22, 33, 45);
+    //game.add(Baer);
+
+    //game.add(new Hero("DANI", 55, 22, 45, 245));
+    //game.add(new Fighter("Horst", 34, 25, 33, 46, 33));
+
+
+
 
     //Heldin und Gegner erstellen:
     Hero annina("Annina", 300, 50, 50, 15);
     Fighter matthias("Matthias", 50, 0, 3, 88, 100);
     Sorcerer pascal("Pascal", 100, 500, 9, 77, 8);
+
 
     //Items am Heap als SmartPointer erstellen:
     shared_ptr<Item> kanone = make_shared<Item>("Kanone", 15);

@@ -10,12 +10,11 @@ class Character;
 
 class Game{
 private:
-    //vector<Character*> characters;
     map<string, Character*> characters;
 
 public:
-    //constructor
-    Game(){};
+    //wenn kein eigener constructor definiert ist, wird der default constructor aufgerufen
+    //Game(){};
 
     //destructor
     ~Game(){
@@ -32,6 +31,8 @@ public:
     void play();
 
     void add(Character* character);
+
+    void tempMapOutput();
 };
 
 #endif //PROTOTYP5_GAME_H
