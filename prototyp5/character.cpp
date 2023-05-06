@@ -18,37 +18,27 @@ Character::Character(Game* manager, const string& name, int health, int gold, in
 }
 
 shared_ptr<Item> Character::getInventory(int index){
-        if(index < 0 || index > (int)inventory.size()){
-            throw IndexException("Error: Ungültiger Index in getInventory.", index);
-        }else if(!inventory[index]){
-            throw EmptySlotException("Error: Ungültiger Inventar Slot in getInventory.", index);
-        }else{
-            return inventory[index];
-        }
+    if(inventory.find(index) != inventory.end()){
+        //nachschauen ob der key bereits existiert
+        return inventory[index]; //Achtung bei map und []. Wenn es key nicht gibt, wird dieser automatisch angelegt.
+    }else{
+        throw IndexException("Error: Ungültiger Index in getInventory.", index);
+    }
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
-    inventory.push_back(item);
-    int i = inventory.size()-1;
-    cout << this->inventory[i] << " wurde an Stelle " << i << " zum Inventar von " << *this << " hinzugefügt." << endl;
-    return i;
+    inventory.insert({nextItemID++, item});
+    cout << this->getInventory(nextItemID) << " wurde an Stelle " << nextItemID << " zum Inventar von " << *this << " hinzugefügt." << endl;
  };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {
-    if(slot < 0){
-        throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
-    }
-    else if(!inventory[slot]){
-        throw EmptySlotException("Error: Ungültiger Inventar Slot in removeInventarItem.", slot);
-    }
-    else if(slot >= (int)inventory.size()){
-        throw EmptyInventarException("Inventar ist leer in removeInventarItem.");
-    }
-    else{
+    if (inventory.find(slot) != inventory.end()){//wenn der slot gefunden wurde
         shared_ptr<Item> tempItem = inventory[slot];
         cout << tempItem << " an Stelle " << slot << " wurde aus dem Inventar von " << *this << " entfernt." << endl;
-        inventory.erase(inventory.begin()+slot); //Item wird gelöscht
+        inventory.erase(inventory.begin()); //Item wird gelöscht
         return tempItem;
+    }else{
+        throw IndexException("Error: Ungültiger Index in removeInventarItem.", slot);
     }
 };
 

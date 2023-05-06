@@ -6,7 +6,8 @@
 #include "game.h"
 #include <memory>
 #include <cstring>
-#include <vector>
+//#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -19,9 +20,11 @@ protected:
     string name;
     int health;
     int gold;
-    vector<shared_ptr<Item>> inventory;
+    //vector<shared_ptr<Item>> inventory;
     int armor;
     int magicResistance;
+    map<int, shared_ptr<Item>> inventory;
+    int nextItemID = 0;
 
 public:
     //default constructor
