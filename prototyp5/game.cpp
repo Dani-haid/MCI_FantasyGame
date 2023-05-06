@@ -86,20 +86,7 @@ try{
             //Falls Heldin noch am Leben ist, Gegenstände verkaufen:
             if(annina->getHealth() >= 0){
                 cout << "Heldin verkauft ihre Gegenstände!"<< endl;
-                while(1){
-                    try{
-                        annina->sellItem(0);
-                    }
-                    catch(IndexException& e){
-                        cerr << e.what() <<" Eingegebener Index: " << e.getIndex() << endl;
-                    }
-                    catch(EmptySlotException& e){
-                        cout << e.what() <<" An Stelle: " << e.getIndex() << " ist kein Gegenstand gespeichert." << endl;
-                    }
-                    catch(EmptyInventarException& e){
-                        break;
-                    }
-                }
+                annina->sellAllItems();
         }
     }
         cout << "------------" << endl;

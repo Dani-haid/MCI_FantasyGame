@@ -27,8 +27,10 @@ shared_ptr<Item> Character::getInventory(int index){
 };
 
 int Character::addInventarItem(shared_ptr<Item> item){
-    inventory.insert({nextItemID++, item});
-    cout << this->getInventory(nextItemID) << " wurde an Stelle " << nextItemID << " zum Inventar von " << *this << " hinzugefügt." << endl;
+    int id = nextItemID++;
+    inventory.insert({id, item});
+    cout << this->getInventory(id) << " wurde an Stelle " << id << " zum Inventar von " << *this << " hinzugefügt." << endl;
+    return id;
  };
 
 shared_ptr<Item> Character::removeInventarItem(int slot) {

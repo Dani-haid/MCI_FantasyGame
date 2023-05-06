@@ -34,22 +34,18 @@ void Hero::attack(Character& enemy){
 };
 
 void Hero::sellItem(int index){
-        if(index < 0) {
-            throw IndexException("Ungültiger Index in sellItem.", index);
-        } else if(!inventory[index]) {
-            throw EmptySlotException("Leerer Inventar Slot in sellItem.", index);
-        }
-        else if(index >= (int)inventory.size()){
-            throw EmptyInventarException("Inventar ist leer in sellItem.");
-        }
-        else{
-            gold += inventory[index]->getValue();
-            cout << inventory[index] << " wird für " << inventory[index]->getValue() <<
-                 " verkauft. " << *this << " besitzt nun " << gold << " Gold." << endl;
-            manager->addSoldItem(inventory[index]);
-            inventory.erase(inventory.begin()+index);
-        }
+    shared_ptr<Item> tempItem = removeInventarItem(index);
+    gold += tempItem->getValue();
+    cout << tempItem << " wird für " << tempItem->getValue() <<
+         " verkauft. " << *this << " besitzt nun " << gold << " Gold." << endl;
+    manager->addSoldItem(tempItem);
 };
+
+void Hero::sellAllItems(){
+    for(auto i : inventory){
+        sellItem(i.first);
+    }
+}
 
 
 bool Hero::fight(Character &enemy){
@@ -95,21 +91,13 @@ bool Hero::fight(Character &enemy){
 
 shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
     //Gegenstand entfernen und zurückgeben
-    int rand_num;
-    shared_ptr<Item> temp = nullptr;
-
-    for(int i = 0; i <= 30; i++){
-        //rand_num = 8;//testvariable
-        rand_num = rand() % 10; //zufälliger Slot (Zahl zwischen 0-9)
-
-        try{
-            temp = enemy.removeInventarItem(rand_num);
-            return temp;
+    if(inventory.size() > 0){
+        int rand_num = rand() % inventory.size(); //zufälliger Slot;
+        auto it = inventory.begin();
+        for (int i = 0; i < rand_num; i++) {
+            it++;
         }
-        catch (EmptySlotException& e){
-        }
-        catch(EmptyInventarException& e){
-        }
+        return it->second;
     }
     throw NoItemFoundException(" Kein Item im Inventar des Characters gefunden.");
 };

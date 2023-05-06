@@ -21,6 +21,7 @@ public:
     virtual void attack(Character& enemy) override;
 
     void sellItem(int index);
+    void sellAllItems();
     bool fight(Character& enemy);
 
     shared_ptr<Item> getEquipment(int index);
