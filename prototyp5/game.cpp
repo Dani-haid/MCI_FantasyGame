@@ -3,22 +3,18 @@
 #include "hero.h"
 #include "fighter.h"
 #include "sorcerer.h"
+#include "exceptions.h"
 
 void Game::play(){
 try{
     //Heldin und Gegner am Heap erstellen und Pointer in map speichern:
     //this (Game) verwaltet ownership von Characters
-    shared_ptr<Hero> annina = make_shared<Hero>(this, "Annina", 300, 50, 50, 15);
-    addCharacter(annina);
+    shared_ptr<Hero> annina = createHero("Annina", 300, 50, 50, 15);
+    shared_ptr<Fighter> matthias = createFighter("Matthias", 50, 0, 3, 88, 100);
+    shared_ptr<Sorcerer> pascal = createSorcerer("Pascal", 100, 500, 9, 77, 8);
 
     //hier wird alles in Einem erstellt. Aber ich muss Annina danach mit dem Key über die map ansprechen.
     //characters.insert(make_pair("annina", new Hero("Annina", 300, 50, 50, 15)));
-
-    shared_ptr<Fighter> matthias = make_shared<Fighter>(this, "Matthias", 50, 0, 3, 88, 100);
-    addCharacter(matthias);
-
-    shared_ptr<Sorcerer> pascal = make_shared<Sorcerer>(this, "Pascal", 100, 500, 9, 77, 8);
-    addCharacter(pascal);
 
     //Items am Heap als SmartPointer erstellen:
     shared_ptr<Item> kanone = make_shared<Item>("Kanone", 15);
@@ -54,14 +50,6 @@ try{
 
     pascal->addInventarItem(lego);
     pascal->addInventarItem(harpune);
-
-    cout << "------------" << endl;
-    try{
-        matthias->setGold(-30);
-    }
-    catch (WrongValueException& e){
-        cout << e.what() << endl;
-    }
 
 /*
     //Kämpfe der Heldin
@@ -141,5 +129,37 @@ void Game::printMapOutput() {
         cout << " Key : " << it->first
              << " , Value : " << it->second
              << endl;
+    }
+}
+
+shared_ptr<Hero> Game::createHero(const string &name, int health, int gold, int armor, int magicResistance) {
+    if(characters.find(name) != characters.end()){
+        throw NoUniqueCharacterKeyException("Key bereits vorhanden. ");
+    }else{
+        auto c = make_shared<Hero>(this, name, health, gold, armor, magicResistance);
+        characters.insert({name, c});
+        return c;
+    }
+};
+
+shared_ptr<Fighter> Game::createFighter(const string &name, int health, int gold, int armor, int magicResistance,
+                    int strength) {
+    if(characters.find(name) != characters.end()){
+        throw NoUniqueCharacterKeyException("Key bereits vorhanden. ");
+    }else{
+        auto c = make_shared<Fighter>(this, name, health, gold, armor, magicResistance, strength);
+        characters.insert({name, c});
+        return c;
+    }
+}
+
+shared_ptr<Sorcerer> Game::createSorcerer(const string &name, int health, int gold, int armor, int magicResistance,
+                     int magicPower) {
+    if(characters.find(name) != characters.end()){
+        throw NoUniqueCharacterKeyException("Key bereits vorhanden. ");
+    }else{
+        auto c = make_shared<Sorcerer>(this, name, health, gold, armor, magicResistance, magicPower);
+        characters.insert({name, c});
+        return c;
     }
 }

@@ -9,6 +9,9 @@
 using namespace std;
 
 class Character;
+class Hero;
+class Fighter;
+class Sorcerer;
 
 class Game{
 protected:
@@ -29,6 +32,10 @@ public:
                  << endl;
         }*/
     };
+
+    shared_ptr<Hero> createHero(const string& name, int health, int gold, int armor, int magicResistance);
+    shared_ptr<Fighter> createFighter(const string& name, int health, int gold, int armor, int magicResistance, int strength);
+    shared_ptr<Sorcerer> createSorcerer(const string& name, int health, int gold, int armor, int magicResistance, int magicPower);
 
     void play();
 
