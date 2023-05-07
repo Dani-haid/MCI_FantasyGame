@@ -42,8 +42,12 @@ void Hero::sellItem(int index){
 };
 
 void Hero::sellAllItems(){
+    vector<int> keys;
     for(auto i : inventory){
-        sellItem(i.first);
+        keys.push_back(i.first);
+    }
+    for(auto k : keys){
+        sellItem(k);
     }
 }
 
