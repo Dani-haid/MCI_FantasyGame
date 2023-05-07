@@ -18,16 +18,16 @@ public:
     //destructor
     virtual ~Hero();
 
-    virtual void attack(Character& enemy) override;
+    virtual void attack(shared_ptr<Character> enemy) override;
 
     void sellItem(int index);
     void sellAllItems();
-    bool fight(Character& enemy);
+
 
     shared_ptr<Item> getEquipment(int index);
     int addEquipmentItem(const shared_ptr<Item> item);
     shared_ptr<Item> removeEquipmentItem(int slot);
-    shared_ptr<Item> retrieveRandomLoot(Character &enemy);
+
 };
 
 ostream& operator<<(ostream& out, const Hero& h);

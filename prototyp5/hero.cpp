@@ -19,18 +19,18 @@ Hero::~Hero(){
     cout << *this << " verabschiedet sich in den Sonnenuntergang." << endl;
 };
 
-void Hero::attack(Character& enemy){
+void Hero::attack(shared_ptr<Character> enemy){
     int x = 15, y = 25;
     int rand_num = rand()%((y+1)-x) + x; //Zufallszahl zwischen x und y
 
-    int damage = rand_num - enemy.getArmor();
+    int damage = rand_num - enemy->getArmor();
     if(damage > 0){
-        enemy.setHealth(enemy.getHealth()-damage);
+        enemy->setHealth(enemy->getHealth()-damage);
     }else{
         cout << "Angriff von " << *this << " war wirkungslos" << endl;
     }
-    cout << *this << " trifft " << enemy << " für " << damage << " Lebenspunkte! "
-    << enemy << " besitzt jetzt noch " << enemy.getHealth() << " Lebenspunkte." << endl;
+    cout << *this << " trifft " << *enemy << " für " << damage << " Lebenspunkte! "
+    << *enemy << " besitzt jetzt noch " << enemy->getHealth() << " Lebenspunkte." << endl;
 };
 
 void Hero::sellItem(int index){
@@ -48,59 +48,7 @@ void Hero::sellAllItems(){
 }
 
 
-bool Hero::fight(Character &enemy){
-    if(health <= 0|| enemy.getHealth() <= 0){
-        cout<< "Hero oder enemy haben keine Lebenspunkte mehr!" << endl;
-        return false;
-    }
-    cout << "------------" << endl;
-    cout << "Neuer Kampf beginnt: " << *this << " gegen " << enemy << endl;
 
-    while(health > 0 && enemy.getHealth() > 0) {
-        this->attack(enemy); //Heldin greift Gegner an
-        if (enemy.getHealth() > 0) {
-            enemy.attack(*this);
-        }
-    }
-
-        if(enemy.getHealth() <= 0) {
-            cout << enemy << " fiel in Ohnmacht! " << *this << " hat noch " << health << " Lebenspunkte übrig!" << endl;
-
-            try {
-                //Wenn es einen gültigen Gegenstand gibt wird dies ausgeführt, sonst gibt es exception
-                shared_ptr<Item> stolenLoot = this->retrieveRandomLoot(enemy);
-                //Wenn es einen gültigen Gegenstand gibt wird dies ausgeführt, sonst gibt es exception
-                this->addInventarItem(stolenLoot);
-                cout << *this << " stiehlt " << enemy << " " << stolenLoot << " im Wert von "
-                << stolenLoot->getValue() << " Gold." << endl;
-            } catch(FullInventarException& e){
-                cout << "fight: " << e.what() << endl;
-            }
-            catch (NoItemFoundException& e){
-                cout << "fight: " << enemy << e.what() << endl;
-            }
-            manager->removeCharacter(enemy.getName());
-            return true;//Heldin hat Kampf gewonnen
-        }else{
-            cout << "Game Over!" << endl;
-            cout << *this << " wurde besiegt! " << enemy << " hat noch " << enemy.getHealth() << " Lebenspunkte übrig!" << endl;
-            manager->removeCharacter(this->getName());
-            return false;//Heldin hat Kampf verloren
-        }
-};
-
-shared_ptr<Item> Hero::retrieveRandomLoot(Character &enemy){
-    //Gegenstand entfernen und zurückgeben
-    if(inventory.size() > 0){
-        int rand_num = rand() % inventory.size(); //zufälliger Slot;
-        auto it = inventory.begin();
-        for (int i = 0; i < rand_num; i++) {
-            it++;
-        }
-        return it->second;
-    }
-    throw NoItemFoundException(" Kein Item im Inventar des Characters gefunden.");
-};
 
 
 shared_ptr<Item> Hero::getEquipment(int index){

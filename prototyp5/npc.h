@@ -18,6 +18,8 @@ public:
             cout << *this << " liegt am Boden." << endl;
         }
     };
+
+    shared_ptr<Item> retrieveRandomLoot();
 };
 
 

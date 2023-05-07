@@ -45,6 +45,8 @@ public:
 
     void addSoldItem(shared_ptr<Item> item);
 
+    bool fight(shared_ptr<Character> enemy1, shared_ptr<Character> enemy2);
+
     void printMapOutput();
 };
 

@@ -14,7 +14,7 @@ public:
 
     //destructor in NPC
 
-    virtual void attack(Character& enemy) override;
+    virtual void attack(shared_ptr<Character> enemy) override;
 
     int getStrength() const {
         return strength;

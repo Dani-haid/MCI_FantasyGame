@@ -36,7 +36,7 @@ public:
     //destructor
     virtual ~Character(){};
 
-    virtual void attack(Character& character) = 0;
+    virtual void attack(shared_ptr<Character> character) = 0;
 
     int addInventarItem(shared_ptr<Item> item);
     shared_ptr<Item> removeInventarItem(int slot);

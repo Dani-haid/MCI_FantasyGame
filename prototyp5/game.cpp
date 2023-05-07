@@ -50,25 +50,11 @@ try{
 
     pascal->addInventarItem(lego);
     pascal->addInventarItem(harpune);
+    pascal->addInventarItem(make_shared<Item>("Leiter", 50));
 
-/*
-    //Kämpfe der Heldin
-    if(!annina->fight(*matthias)){
-        annina.reset();
-        return 1;
-    }else{
+    if(fight(annina, matthias)){
         matthias.reset();
-    }
-    if(!annina->fight(*pascal)){
-        exit(0);
-    }else{
-        pascal.reset();
-    }
-*/
-
-    if(annina->fight(*matthias)){
-        matthias.reset();
-        if(annina->fight(*pascal)){
+        if(fight(annina, pascal)){
             pascal.reset();
 
             //Falls Heldin noch am Leben ist, Gegenstände verkaufen:
@@ -79,6 +65,7 @@ try{
     }
         cout << "------------" << endl;
     }
+    cout << "Game Over!" << endl;
     annina.reset();
 
 }
@@ -163,3 +150,46 @@ shared_ptr<Sorcerer> Game::createSorcerer(const string &name, int health, int go
         return c;
     }
 }
+
+bool Game::fight(shared_ptr<Character> enemy1, shared_ptr<Character> enemy2){
+    if(enemy1->getHealth() <= 0|| enemy2->getHealth() <= 0){
+        cout<< "Hero oder enemy haben keine Lebenspunkte mehr!" << endl;
+        return false;
+    }
+    cout << "------------" << endl;
+    cout << "Neuer Kampf beginnt: " << *enemy1 << " gegen " << *enemy2 << endl;
+
+    while(enemy1->getHealth() > 0 && enemy2->getHealth() > 0) {
+        enemy1->attack(enemy2);
+        if (enemy2->getHealth() > 0) {
+            enemy2->attack(enemy1);
+        }
+    }
+
+    shared_ptr<Character> winner;
+    shared_ptr<Character> loser;
+
+    if(enemy1->getHealth() <= 0) {
+        loser = enemy1;
+        winner = enemy2;
+    }else{
+        loser = enemy2;
+        winner = enemy1;
+    }
+    cout << *loser << " fiel in Ohnmacht! " << *winner << " hat noch " << winner->getHealth() << " Lebenspunkte übrig!" << endl;
+    shared_ptr<Npc> npc = dynamic_pointer_cast<Npc>(loser);
+    if(npc){
+        try {
+            //Wenn es einen gültigen Gegenstand gibt wird dies ausgeführt, sonst gibt es exception
+            shared_ptr<Item> stolenLoot = npc->retrieveRandomLoot();
+            //Wenn es einen gültigen Gegenstand gibt wird dies ausgeführt, sonst gibt es exception
+            winner->addInventarItem(stolenLoot);
+            cout << *winner << " stiehlt " << *loser << " " << stolenLoot << " im Wert von " << stolenLoot->getValue() << " Gold." << endl;
+            }
+            catch (NoItemFoundException& e){
+                cout << "fight: " << loser << e.what() << endl;
+            }
+    }
+    removeCharacter(loser->getName());
+    return enemy1->getHealth() > 0;
+};
